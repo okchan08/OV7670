@@ -297,22 +297,13 @@ CONFIG.CONST_VAL {0} \
 
   # Create port connections
   connect_bd_net -net Net [get_bd_ports siod] [get_bd_pins camera_controller_0/siod]
-  set_property -dict [ list \
-HDL_ATTRIBUTE.DEBUG {true} \
- ] [get_bd_nets Net]
   connect_bd_net -net VGA_0_VGA_BLUE [get_bd_ports VGA_BLUE] [get_bd_pins VGA_0/VGA_BLUE]
   connect_bd_net -net VGA_0_VGA_GREEN [get_bd_ports VGA_GREEN] [get_bd_pins VGA_0/VGA_GREEN]
   connect_bd_net -net VGA_0_VGA_H_SYNC [get_bd_ports VGA_H_SYNC] [get_bd_pins VGA_0/VGA_H_SYNC]
   connect_bd_net -net VGA_0_VGA_RED [get_bd_ports VGA_RED] [get_bd_pins VGA_0/VGA_RED]
   connect_bd_net -net VGA_0_VGA_V_SYNC [get_bd_ports VGA_V_SYNC] [get_bd_pins VGA_0/VGA_V_SYNC]
   connect_bd_net -net VGA_0_frame_addr [get_bd_pins VGA_0/frame_addr] [get_bd_pins blk_mem_gen_0/addrb]
-  set_property -dict [ list \
-HDL_ATTRIBUTE.DEBUG {true} \
- ] [get_bd_nets VGA_0_frame_addr]
   connect_bd_net -net blk_mem_gen_0_doutb [get_bd_pins VGA_0/frame_pix] [get_bd_pins blk_mem_gen_0/doutb]
-  set_property -dict [ list \
-HDL_ATTRIBUTE.DEBUG {true} \
- ] [get_bd_nets blk_mem_gen_0_doutb]
   connect_bd_net -net button_0_cntl_out [get_bd_pins VGA_0/cntl] [get_bd_pins button_0/cntl_out]
   connect_bd_net -net button_0_resend_out [get_bd_pins button_0/resend_out] [get_bd_pins camera_controller_0/resend]
   connect_bd_net -net camera_capture_0_addr [get_bd_pins blk_mem_gen_0/addra] [get_bd_pins camera_capture_0/addr]
@@ -324,31 +315,16 @@ HDL_ATTRIBUTE.DEBUG {true} \
 HDL_ATTRIBUTE.DEBUG {true} \
  ] [get_bd_nets camera_capture_0_dout]
   connect_bd_net -net camera_capture_0_wr_en [get_bd_pins blk_mem_gen_0/wea] [get_bd_pins camera_capture_0/wr_en]
+  set_property -dict [ list \
+HDL_ATTRIBUTE.DEBUG {true} \
+ ] [get_bd_nets camera_capture_0_wr_en]
   connect_bd_net -net camera_controller_0_config_done [get_bd_ports config_done] [get_bd_pins camera_controller_0/config_done]
-  set_property -dict [ list \
-HDL_ATTRIBUTE.DEBUG {true} \
- ] [get_bd_nets camera_controller_0_config_done]
   connect_bd_net -net camera_controller_0_power_down [get_bd_ports power_down] [get_bd_pins camera_controller_0/power_down]
-  set_property -dict [ list \
-HDL_ATTRIBUTE.DEBUG {true} \
- ] [get_bd_nets camera_controller_0_power_down]
   connect_bd_net -net camera_controller_0_reset [get_bd_ports reset] [get_bd_pins camera_controller_0/reset]
   connect_bd_net -net camera_controller_0_sioc [get_bd_ports sioc] [get_bd_pins camera_controller_0/sioc]
-  set_property -dict [ list \
-HDL_ATTRIBUTE.DEBUG {true} \
- ] [get_bd_nets camera_controller_0_sioc]
   connect_bd_net -net camera_controller_0_xclk [get_bd_ports xclk] [get_bd_pins camera_controller_0/xclk]
-  set_property -dict [ list \
-HDL_ATTRIBUTE.DEBUG {true} \
- ] [get_bd_nets camera_controller_0_xclk]
   connect_bd_net -net camera_h_ref_1 [get_bd_ports camera_h_ref] [get_bd_pins camera_capture_0/camera_h_ref]
-  set_property -dict [ list \
-HDL_ATTRIBUTE.DEBUG {true} \
- ] [get_bd_nets camera_h_ref_1]
   connect_bd_net -net camera_v_sync_1 [get_bd_ports camera_v_sync] [get_bd_pins camera_capture_0/camera_v_sync]
-  set_property -dict [ list \
-HDL_ATTRIBUTE.DEBUG {true} \
- ] [get_bd_nets camera_v_sync_1]
   connect_bd_net -net clk_in1_1 [get_bd_ports clk_in1] [get_bd_pins clk_wiz_0/clk_in1]
   connect_bd_net -net clk_wiz_0_clk_12MHz [get_bd_pins camera_controller_0/clk] [get_bd_pins clk_wiz_0/clk_12MHz]
   connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins VGA_0/pix_clk] [get_bd_pins blk_mem_gen_0/clkb] [get_bd_pins button_0/clk] [get_bd_pins clk_wiz_0/clk_vga_148_5MHz]

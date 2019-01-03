@@ -1,7 +1,7 @@
 //Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2017.2 (lin64) Build 1909853 Thu Jun 15 18:39:10 MDT 2017
-//Date        : Thu Jan  3 19:46:21 2019
+//Date        : Thu Jan  3 22:38:47 2019
 //Host        : yoshiki-FMVA77JRY running 64-bit Ubuntu 18.04.1 LTS
 //Command     : generate_target design_1.bd
 //Design      : design_1
@@ -52,26 +52,26 @@ module design_1
   inout siod;
   output xclk;
 
-  (* DEBUG = "true" *) (* MARK_DEBUG *) wire Net;
+  wire Net;
   wire [3:0]VGA_0_VGA_BLUE;
   wire [3:0]VGA_0_VGA_GREEN;
   wire VGA_0_VGA_H_SYNC;
   wire [3:0]VGA_0_VGA_RED;
   wire VGA_0_VGA_V_SYNC;
-  (* DEBUG = "true" *) (* MARK_DEBUG *) wire [18:0]VGA_0_frame_addr;
-  (* DEBUG = "true" *) (* MARK_DEBUG *) wire [11:0]blk_mem_gen_0_doutb;
+  wire [18:0]VGA_0_frame_addr;
+  wire [11:0]blk_mem_gen_0_doutb;
   wire button_0_cntl_out;
   wire button_0_resend_out;
   (* DEBUG = "true" *) (* MARK_DEBUG *) wire [18:0]camera_capture_0_addr;
   (* DEBUG = "true" *) (* MARK_DEBUG *) wire [11:0]camera_capture_0_dout;
-  wire camera_capture_0_wr_en;
-  (* DEBUG = "true" *) (* MARK_DEBUG *) wire camera_controller_0_config_done;
-  (* DEBUG = "true" *) (* MARK_DEBUG *) wire camera_controller_0_power_down;
+  (* DEBUG = "true" *) (* MARK_DEBUG *) wire camera_capture_0_wr_en;
+  wire camera_controller_0_config_done;
+  wire camera_controller_0_power_down;
   wire camera_controller_0_reset;
-  (* DEBUG = "true" *) (* MARK_DEBUG *) wire camera_controller_0_sioc;
-  (* DEBUG = "true" *) (* MARK_DEBUG *) wire camera_controller_0_xclk;
-  (* DEBUG = "true" *) (* MARK_DEBUG *) wire camera_h_ref_1;
-  (* DEBUG = "true" *) (* MARK_DEBUG *) wire camera_v_sync_1;
+  wire camera_controller_0_sioc;
+  wire camera_controller_0_xclk;
+  wire camera_h_ref_1;
+  wire camera_v_sync_1;
   wire clk_in1_1;
   wire clk_wiz_0_clk_12MHz;
   wire clk_wiz_0_clk_out1;
