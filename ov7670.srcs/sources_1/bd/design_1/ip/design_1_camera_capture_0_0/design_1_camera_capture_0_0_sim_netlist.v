@@ -1,8 +1,8 @@
 // Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2017.2 (lin64) Build 1909853 Thu Jun 15 18:39:10 MDT 2017
-// Date        : Fri Jul  6 22:54:40 2018
-// Host        : yoshiki-FMVA77JRY running 64-bit Ubuntu 18.04 LTS
+// Date        : Thu Jan  3 18:30:44 2019
+// Host        : yoshiki-FMVA77JRY running 64-bit Ubuntu 18.04.1 LTS
 // Command     : write_verilog -force -mode funcsim
 //               /home/yoshiki/xilinx/nexys4/ov7670/ov7670.srcs/sources_1/bd/design_1/ip/design_1_camera_capture_0_0/design_1_camera_capture_0_0_sim_netlist.v
 // Design      : design_1_camera_capture_0_0
@@ -26,11 +26,11 @@ module design_1_camera_capture_0_0
   input camera_v_sync;
   input camera_h_ref;
   input [7:0]din;
-  output [17:0]addr;
+  output [18:0]addr;
   output [11:0]dout;
   output wr_en;
 
-  wire [17:0]addr;
+  wire [18:0]addr;
   wire camera_h_ref;
   wire camera_v_sync;
   wire [7:0]din;
@@ -57,7 +57,7 @@ module design_1_camera_capture_0_0_camera_capture
     camera_v_sync,
     pclk,
     din);
-  output [17:0]addr;
+  output [18:0]addr;
   output [11:0]dout;
   output wr_en;
   input camera_h_ref;
@@ -65,7 +65,7 @@ module design_1_camera_capture_0_0_camera_capture
   input pclk;
   input [7:0]din;
 
-  wire [17:0]addr;
+  wire [18:0]addr;
   wire \address_next[0]_i_2_n_0 ;
   wire \address_next[0]_i_3_n_0 ;
   wire \address_next[0]_i_4_n_0 ;
@@ -77,6 +77,7 @@ module design_1_camera_capture_0_0_camera_capture
   wire \address_next[16]_i_2_n_0 ;
   wire \address_next[16]_i_3_n_0 ;
   wire \address_next[16]_i_4_n_0 ;
+  wire \address_next[16]_i_5_n_0 ;
   wire \address_next[4]_i_2_n_0 ;
   wire \address_next[4]_i_3_n_0 ;
   wire \address_next[4]_i_4_n_0 ;
@@ -85,7 +86,7 @@ module design_1_camera_capture_0_0_camera_capture
   wire \address_next[8]_i_3_n_0 ;
   wire \address_next[8]_i_4_n_0 ;
   wire \address_next[8]_i_5_n_0 ;
-  wire [18:1]address_next_reg;
+  wire [19:1]address_next_reg;
   wire \address_next_reg[0]_i_1_n_0 ;
   wire \address_next_reg[0]_i_1_n_1 ;
   wire \address_next_reg[0]_i_1_n_2 ;
@@ -102,8 +103,10 @@ module design_1_camera_capture_0_0_camera_capture
   wire \address_next_reg[12]_i_1_n_5 ;
   wire \address_next_reg[12]_i_1_n_6 ;
   wire \address_next_reg[12]_i_1_n_7 ;
+  wire \address_next_reg[16]_i_1_n_1 ;
   wire \address_next_reg[16]_i_1_n_2 ;
   wire \address_next_reg[16]_i_1_n_3 ;
+  wire \address_next_reg[16]_i_1_n_4 ;
   wire \address_next_reg[16]_i_1_n_5 ;
   wire \address_next_reg[16]_i_1_n_6 ;
   wire \address_next_reg[16]_i_1_n_7 ;
@@ -135,8 +138,7 @@ module design_1_camera_capture_0_0_camera_capture
   wire wr_en;
   wire [0:0]write_state;
   wire \write_state[0]_i_1_n_0 ;
-  wire [3:2]\NLW_address_next_reg[16]_i_1_CO_UNCONNECTED ;
-  wire [3:3]\NLW_address_next_reg[16]_i_1_O_UNCONNECTED ;
+  wire [3:3]\NLW_address_next_reg[16]_i_1_CO_UNCONNECTED ;
 
   LUT1 #(
     .INIT(2'h2)) 
@@ -181,18 +183,23 @@ module design_1_camera_capture_0_0_camera_capture
   LUT1 #(
     .INIT(2'h2)) 
     \address_next[16]_i_2 
-       (.I0(address_next_reg[18]),
+       (.I0(address_next_reg[19]),
         .O(\address_next[16]_i_2_n_0 ));
   LUT1 #(
     .INIT(2'h2)) 
     \address_next[16]_i_3 
-       (.I0(address_next_reg[17]),
+       (.I0(address_next_reg[18]),
         .O(\address_next[16]_i_3_n_0 ));
   LUT1 #(
     .INIT(2'h2)) 
     \address_next[16]_i_4 
-       (.I0(address_next_reg[16]),
+       (.I0(address_next_reg[17]),
         .O(\address_next[16]_i_4_n_0 ));
+  LUT1 #(
+    .INIT(2'h2)) 
+    \address_next[16]_i_5 
+       (.I0(address_next_reg[16]),
+        .O(\address_next[16]_i_5_n_0 ));
   LUT1 #(
     .INIT(2'h2)) 
     \address_next[4]_i_2 
@@ -313,11 +320,11 @@ module design_1_camera_capture_0_0_camera_capture
         .R(camera_v_sync));
   CARRY4 \address_next_reg[16]_i_1 
        (.CI(\address_next_reg[12]_i_1_n_0 ),
-        .CO({\NLW_address_next_reg[16]_i_1_CO_UNCONNECTED [3:2],\address_next_reg[16]_i_1_n_2 ,\address_next_reg[16]_i_1_n_3 }),
+        .CO({\NLW_address_next_reg[16]_i_1_CO_UNCONNECTED [3],\address_next_reg[16]_i_1_n_1 ,\address_next_reg[16]_i_1_n_2 ,\address_next_reg[16]_i_1_n_3 }),
         .CYINIT(1'b0),
         .DI({1'b0,1'b0,1'b0,1'b0}),
-        .O({\NLW_address_next_reg[16]_i_1_O_UNCONNECTED [3],\address_next_reg[16]_i_1_n_5 ,\address_next_reg[16]_i_1_n_6 ,\address_next_reg[16]_i_1_n_7 }),
-        .S({1'b0,\address_next[16]_i_2_n_0 ,\address_next[16]_i_3_n_0 ,\address_next[16]_i_4_n_0 }));
+        .O({\address_next_reg[16]_i_1_n_4 ,\address_next_reg[16]_i_1_n_5 ,\address_next_reg[16]_i_1_n_6 ,\address_next_reg[16]_i_1_n_7 }),
+        .S({\address_next[16]_i_2_n_0 ,\address_next[16]_i_3_n_0 ,\address_next[16]_i_4_n_0 ,\address_next[16]_i_5_n_0 }));
   FDRE #(
     .INIT(1'b0)) 
     \address_next_reg[17] 
@@ -333,6 +340,14 @@ module design_1_camera_capture_0_0_camera_capture
         .CE(p_1_in),
         .D(\address_next_reg[16]_i_1_n_5 ),
         .Q(address_next_reg[18]),
+        .R(camera_v_sync));
+  FDRE #(
+    .INIT(1'b0)) 
+    \address_next_reg[19] 
+       (.C(pclk),
+        .CE(p_1_in),
+        .D(\address_next_reg[16]_i_1_n_4 ),
+        .Q(address_next_reg[19]),
         .R(camera_v_sync));
   FDRE #(
     .INIT(1'b0)) 
@@ -491,6 +506,14 @@ module design_1_camera_capture_0_0_camera_capture
         .CE(1'b1),
         .D(address_next_reg[18]),
         .Q(addr[17]),
+        .R(camera_v_sync));
+  FDRE #(
+    .INIT(1'b0)) 
+    \address_reg[19] 
+       (.C(pclk),
+        .CE(1'b1),
+        .D(address_next_reg[19]),
+        .Q(addr[18]),
         .R(camera_v_sync));
   FDRE #(
     .INIT(1'b0)) 

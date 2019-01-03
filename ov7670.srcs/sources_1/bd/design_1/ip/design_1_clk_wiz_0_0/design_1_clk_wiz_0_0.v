@@ -58,7 +58,7 @@
 //----------------------------------------------------------------------------
 // clk_vga_148_5MHz___148.438______0.000______50.0______108.254_____87.466
 // clk_108MHz___107.955______0.000______50.0______114.767_____87.466
-// clk_8MHz_____9.277______0.000______50.0______191.758_____87.466
+// clk_12MHz____11.995______0.000______50.0______182.550_____87.466
 //
 //----------------------------------------------------------------------------
 // Input Clock   Freq (MHz)    Input Jitter (UI)
@@ -74,7 +74,7 @@ module design_1_clk_wiz_0_0
   // Clock out ports
   output        clk_vga_148_5MHz,
   output        clk_108MHz,
-  output        clk_8MHz,
+  output        clk_12MHz,
   // Status and control signals
   input         reset,
   output        locked,
@@ -87,7 +87,7 @@ module design_1_clk_wiz_0_0
   // Clock out ports  
   .clk_vga_148_5MHz(clk_vga_148_5MHz),
   .clk_108MHz(clk_108MHz),
-  .clk_8MHz(clk_8MHz),
+  .clk_12MHz(clk_12MHz),
   // Status and control signals               
   .reset(reset), 
   .locked(locked),

@@ -1,7 +1,7 @@
 // Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2017.2 (lin64) Build 1909853 Thu Jun 15 18:39:10 MDT 2017
-// Date        : Thu Jan  3 00:21:05 2019
+// Date        : Thu Jan  3 17:28:27 2019
 // Host        : yoshiki-FMVA77JRY running 64-bit Ubuntu 18.04.1 LTS
 // Command     : write_verilog -force -mode funcsim
 //               /home/yoshiki/xilinx/nexys4/ov7670/ov7670.srcs/sources_1/bd/design_1/ip/design_1_clk_wiz_0_0/design_1_clk_wiz_0_0_sim_netlist.v
@@ -16,19 +16,19 @@
 module design_1_clk_wiz_0_0
    (clk_vga_148_5MHz,
     clk_108MHz,
-    clk_8MHz,
+    clk_12MHz,
     reset,
     locked,
     clk_in1);
   output clk_vga_148_5MHz;
   output clk_108MHz;
-  output clk_8MHz;
+  output clk_12MHz;
   input reset;
   output locked;
   input clk_in1;
 
   wire clk_108MHz;
-  wire clk_8MHz;
+  wire clk_12MHz;
   (* IBUF_LOW_PWR *) wire clk_in1;
   wire clk_vga_148_5MHz;
   wire locked;
@@ -36,7 +36,7 @@ module design_1_clk_wiz_0_0
 
   design_1_clk_wiz_0_0_design_1_clk_wiz_0_0_clk_wiz inst
        (.clk_108MHz(clk_108MHz),
-        .clk_8MHz(clk_8MHz),
+        .clk_12MHz(clk_12MHz),
         .clk_in1(clk_in1),
         .clk_vga_148_5MHz(clk_vga_148_5MHz),
         .locked(locked),
@@ -47,21 +47,21 @@ endmodule
 module design_1_clk_wiz_0_0_design_1_clk_wiz_0_0_clk_wiz
    (clk_vga_148_5MHz,
     clk_108MHz,
-    clk_8MHz,
+    clk_12MHz,
     reset,
     locked,
     clk_in1);
   output clk_vga_148_5MHz;
   output clk_108MHz;
-  output clk_8MHz;
+  output clk_12MHz;
   input reset;
   output locked;
   input clk_in1;
 
   wire clk_108MHz;
   wire clk_108MHz_design_1_clk_wiz_0_0;
-  wire clk_8MHz;
-  wire clk_8MHz_design_1_clk_wiz_0_0;
+  wire clk_12MHz;
+  wire clk_12MHz_design_1_clk_wiz_0_0;
   wire clk_in1;
   wire clk_in1_design_1_clk_wiz_0_0;
   wire clk_vga_148_5MHz;
@@ -108,8 +108,8 @@ module design_1_clk_wiz_0_0_design_1_clk_wiz_0_0_clk_wiz
         .O(clk_108MHz));
   (* BOX_TYPE = "PRIMITIVE" *) 
   BUFG clkout3_buf
-       (.I(clk_8MHz_design_1_clk_wiz_0_0),
-        .O(clk_8MHz));
+       (.I(clk_12MHz_design_1_clk_wiz_0_0),
+        .O(clk_12MHz));
   (* BOX_TYPE = "PRIMITIVE" *) 
   MMCME2_ADV #(
     .BANDWIDTH("OPTIMIZED"),
@@ -126,7 +126,7 @@ module design_1_clk_wiz_0_0_design_1_clk_wiz_0_0_clk_wiz
     .CLKOUT1_DUTY_CYCLE(0.500000),
     .CLKOUT1_PHASE(0.000000),
     .CLKOUT1_USE_FINE_PS("FALSE"),
-    .CLKOUT2_DIVIDE(128),
+    .CLKOUT2_DIVIDE(99),
     .CLKOUT2_DUTY_CYCLE(0.500000),
     .CLKOUT2_PHASE(0.000000),
     .CLKOUT2_USE_FINE_PS("FALSE"),
@@ -173,7 +173,7 @@ module design_1_clk_wiz_0_0_design_1_clk_wiz_0_0_clk_wiz
         .CLKOUT0B(NLW_mmcm_adv_inst_CLKOUT0B_UNCONNECTED),
         .CLKOUT1(clk_108MHz_design_1_clk_wiz_0_0),
         .CLKOUT1B(NLW_mmcm_adv_inst_CLKOUT1B_UNCONNECTED),
-        .CLKOUT2(clk_8MHz_design_1_clk_wiz_0_0),
+        .CLKOUT2(clk_12MHz_design_1_clk_wiz_0_0),
         .CLKOUT2B(NLW_mmcm_adv_inst_CLKOUT2B_UNCONNECTED),
         .CLKOUT3(NLW_mmcm_adv_inst_CLKOUT3_UNCONNECTED),
         .CLKOUT3B(NLW_mmcm_adv_inst_CLKOUT3B_UNCONNECTED),

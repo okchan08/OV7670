@@ -58,7 +58,7 @@
 //----------------------------------------------------------------------------
 // clk_vga_148_5MHz___148.438______0.000______50.0______108.254_____87.466
 // clk_108MHz___107.955______0.000______50.0______114.767_____87.466
-// clk_8MHz_____9.277______0.000______50.0______191.758_____87.466
+// clk_12MHz____11.995______0.000______50.0______182.550_____87.466
 //
 //----------------------------------------------------------------------------
 // Input Clock   Freq (MHz)    Input Jitter (UI)
@@ -73,7 +73,7 @@ module design_1_clk_wiz_0_0_clk_wiz
   // Clock out ports
   output        clk_vga_148_5MHz,
   output        clk_108MHz,
-  output        clk_8MHz,
+  output        clk_12MHz,
   // Status and control signals
   input         reset,
   output        locked,
@@ -97,7 +97,7 @@ wire clk_in2_design_1_clk_wiz_0_0;
 
   wire        clk_vga_148_5MHz_design_1_clk_wiz_0_0;
   wire        clk_108MHz_design_1_clk_wiz_0_0;
-  wire        clk_8MHz_design_1_clk_wiz_0_0;
+  wire        clk_12MHz_design_1_clk_wiz_0_0;
   wire        clk_out4_design_1_clk_wiz_0_0;
   wire        clk_out5_design_1_clk_wiz_0_0;
   wire        clk_out6_design_1_clk_wiz_0_0;
@@ -139,7 +139,7 @@ wire clk_in2_design_1_clk_wiz_0_0;
     .CLKOUT1_PHASE        (0.000),
     .CLKOUT1_DUTY_CYCLE   (0.500),
     .CLKOUT1_USE_FINE_PS  ("FALSE"),
-    .CLKOUT2_DIVIDE       (128),
+    .CLKOUT2_DIVIDE       (99),
     .CLKOUT2_PHASE        (0.000),
     .CLKOUT2_DUTY_CYCLE   (0.500),
     .CLKOUT2_USE_FINE_PS  ("FALSE"),
@@ -153,7 +153,7 @@ wire clk_in2_design_1_clk_wiz_0_0;
     .CLKOUT0B            (clkout0b_unused),
     .CLKOUT1             (clk_108MHz_design_1_clk_wiz_0_0),
     .CLKOUT1B            (clkout1b_unused),
-    .CLKOUT2             (clk_8MHz_design_1_clk_wiz_0_0),
+    .CLKOUT2             (clk_12MHz_design_1_clk_wiz_0_0),
     .CLKOUT2B            (clkout2b_unused),
     .CLKOUT3             (clkout3_unused),
     .CLKOUT3B            (clkout3b_unused),
@@ -209,8 +209,8 @@ wire clk_in2_design_1_clk_wiz_0_0;
     .I   (clk_108MHz_design_1_clk_wiz_0_0));
 
   BUFG clkout3_buf
-   (.O   (clk_8MHz),
-    .I   (clk_8MHz_design_1_clk_wiz_0_0));
+   (.O   (clk_12MHz),
+    .I   (clk_12MHz_design_1_clk_wiz_0_0));
 
 
 

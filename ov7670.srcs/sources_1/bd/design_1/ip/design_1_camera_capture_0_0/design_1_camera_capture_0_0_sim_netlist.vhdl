@@ -1,8 +1,8 @@
 -- Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2017.2 (lin64) Build 1909853 Thu Jun 15 18:39:10 MDT 2017
--- Date        : Fri Jul  6 22:54:40 2018
--- Host        : yoshiki-FMVA77JRY running 64-bit Ubuntu 18.04 LTS
+-- Date        : Thu Jan  3 18:30:44 2019
+-- Host        : yoshiki-FMVA77JRY running 64-bit Ubuntu 18.04.1 LTS
 -- Command     : write_vhdl -force -mode funcsim
 --               /home/yoshiki/xilinx/nexys4/ov7670/ov7670.srcs/sources_1/bd/design_1/ip/design_1_camera_capture_0_0/design_1_camera_capture_0_0_sim_netlist.vhdl
 -- Design      : design_1_camera_capture_0_0
@@ -16,7 +16,7 @@ library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
 entity design_1_camera_capture_0_0_camera_capture is
   port (
-    addr : out STD_LOGIC_VECTOR ( 17 downto 0 );
+    addr : out STD_LOGIC_VECTOR ( 18 downto 0 );
     dout : out STD_LOGIC_VECTOR ( 11 downto 0 );
     wr_en : out STD_LOGIC;
     camera_h_ref : in STD_LOGIC;
@@ -40,6 +40,7 @@ architecture STRUCTURE of design_1_camera_capture_0_0_camera_capture is
   signal \address_next[16]_i_2_n_0\ : STD_LOGIC;
   signal \address_next[16]_i_3_n_0\ : STD_LOGIC;
   signal \address_next[16]_i_4_n_0\ : STD_LOGIC;
+  signal \address_next[16]_i_5_n_0\ : STD_LOGIC;
   signal \address_next[4]_i_2_n_0\ : STD_LOGIC;
   signal \address_next[4]_i_3_n_0\ : STD_LOGIC;
   signal \address_next[4]_i_4_n_0\ : STD_LOGIC;
@@ -48,7 +49,7 @@ architecture STRUCTURE of design_1_camera_capture_0_0_camera_capture is
   signal \address_next[8]_i_3_n_0\ : STD_LOGIC;
   signal \address_next[8]_i_4_n_0\ : STD_LOGIC;
   signal \address_next[8]_i_5_n_0\ : STD_LOGIC;
-  signal address_next_reg : STD_LOGIC_VECTOR ( 18 downto 1 );
+  signal address_next_reg : STD_LOGIC_VECTOR ( 19 downto 1 );
   signal \address_next_reg[0]_i_1_n_0\ : STD_LOGIC;
   signal \address_next_reg[0]_i_1_n_1\ : STD_LOGIC;
   signal \address_next_reg[0]_i_1_n_2\ : STD_LOGIC;
@@ -65,8 +66,10 @@ architecture STRUCTURE of design_1_camera_capture_0_0_camera_capture is
   signal \address_next_reg[12]_i_1_n_5\ : STD_LOGIC;
   signal \address_next_reg[12]_i_1_n_6\ : STD_LOGIC;
   signal \address_next_reg[12]_i_1_n_7\ : STD_LOGIC;
+  signal \address_next_reg[16]_i_1_n_1\ : STD_LOGIC;
   signal \address_next_reg[16]_i_1_n_2\ : STD_LOGIC;
   signal \address_next_reg[16]_i_1_n_3\ : STD_LOGIC;
+  signal \address_next_reg[16]_i_1_n_4\ : STD_LOGIC;
   signal \address_next_reg[16]_i_1_n_5\ : STD_LOGIC;
   signal \address_next_reg[16]_i_1_n_6\ : STD_LOGIC;
   signal \address_next_reg[16]_i_1_n_7\ : STD_LOGIC;
@@ -92,8 +95,7 @@ architecture STRUCTURE of design_1_camera_capture_0_0_camera_capture is
   signal p_1_in : STD_LOGIC;
   signal write_state : STD_LOGIC_VECTOR ( 0 to 0 );
   signal \write_state[0]_i_1_n_0\ : STD_LOGIC;
-  signal \NLW_address_next_reg[16]_i_1_CO_UNCONNECTED\ : STD_LOGIC_VECTOR ( 3 downto 2 );
-  signal \NLW_address_next_reg[16]_i_1_O_UNCONNECTED\ : STD_LOGIC_VECTOR ( 3 to 3 );
+  signal \NLW_address_next_reg[16]_i_1_CO_UNCONNECTED\ : STD_LOGIC_VECTOR ( 3 to 3 );
 begin
 \address_next[0]_i_2\: unisim.vcomponents.LUT1
     generic map(
@@ -164,7 +166,7 @@ begin
       INIT => X"2"
     )
         port map (
-      I0 => address_next_reg(18),
+      I0 => address_next_reg(19),
       O => \address_next[16]_i_2_n_0\
     );
 \address_next[16]_i_3\: unisim.vcomponents.LUT1
@@ -172,7 +174,7 @@ begin
       INIT => X"2"
     )
         port map (
-      I0 => address_next_reg(17),
+      I0 => address_next_reg(18),
       O => \address_next[16]_i_3_n_0\
     );
 \address_next[16]_i_4\: unisim.vcomponents.LUT1
@@ -180,8 +182,16 @@ begin
       INIT => X"2"
     )
         port map (
-      I0 => address_next_reg(16),
+      I0 => address_next_reg(17),
       O => \address_next[16]_i_4_n_0\
+    );
+\address_next[16]_i_5\: unisim.vcomponents.LUT1
+    generic map(
+      INIT => X"2"
+    )
+        port map (
+      I0 => address_next_reg(16),
+      O => \address_next[16]_i_5_n_0\
     );
 \address_next[4]_i_2\: unisim.vcomponents.LUT1
     generic map(
@@ -374,19 +384,20 @@ begin
 \address_next_reg[16]_i_1\: unisim.vcomponents.CARRY4
      port map (
       CI => \address_next_reg[12]_i_1_n_0\,
-      CO(3 downto 2) => \NLW_address_next_reg[16]_i_1_CO_UNCONNECTED\(3 downto 2),
+      CO(3) => \NLW_address_next_reg[16]_i_1_CO_UNCONNECTED\(3),
+      CO(2) => \address_next_reg[16]_i_1_n_1\,
       CO(1) => \address_next_reg[16]_i_1_n_2\,
       CO(0) => \address_next_reg[16]_i_1_n_3\,
       CYINIT => '0',
       DI(3 downto 0) => B"0000",
-      O(3) => \NLW_address_next_reg[16]_i_1_O_UNCONNECTED\(3),
+      O(3) => \address_next_reg[16]_i_1_n_4\,
       O(2) => \address_next_reg[16]_i_1_n_5\,
       O(1) => \address_next_reg[16]_i_1_n_6\,
       O(0) => \address_next_reg[16]_i_1_n_7\,
-      S(3) => '0',
-      S(2) => \address_next[16]_i_2_n_0\,
-      S(1) => \address_next[16]_i_3_n_0\,
-      S(0) => \address_next[16]_i_4_n_0\
+      S(3) => \address_next[16]_i_2_n_0\,
+      S(2) => \address_next[16]_i_3_n_0\,
+      S(1) => \address_next[16]_i_4_n_0\,
+      S(0) => \address_next[16]_i_5_n_0\
     );
 \address_next_reg[17]\: unisim.vcomponents.FDRE
     generic map(
@@ -408,6 +419,17 @@ begin
       CE => p_1_in,
       D => \address_next_reg[16]_i_1_n_5\,
       Q => address_next_reg(18),
+      R => camera_v_sync
+    );
+\address_next_reg[19]\: unisim.vcomponents.FDRE
+    generic map(
+      INIT => '0'
+    )
+        port map (
+      C => pclk,
+      CE => p_1_in,
+      D => \address_next_reg[16]_i_1_n_4\,
+      Q => address_next_reg(19),
       R => camera_v_sync
     );
 \address_next_reg[1]\: unisim.vcomponents.FDRE
@@ -642,6 +664,17 @@ begin
       CE => '1',
       D => address_next_reg(18),
       Q => addr(17),
+      R => camera_v_sync
+    );
+\address_reg[19]\: unisim.vcomponents.FDRE
+    generic map(
+      INIT => '0'
+    )
+        port map (
+      C => pclk,
+      CE => '1',
+      D => address_next_reg(19),
+      Q => addr(18),
       R => camera_v_sync
     );
 \address_reg[1]\: unisim.vcomponents.FDRE
@@ -1056,7 +1089,7 @@ entity design_1_camera_capture_0_0 is
     camera_v_sync : in STD_LOGIC;
     camera_h_ref : in STD_LOGIC;
     din : in STD_LOGIC_VECTOR ( 7 downto 0 );
-    addr : out STD_LOGIC_VECTOR ( 17 downto 0 );
+    addr : out STD_LOGIC_VECTOR ( 18 downto 0 );
     dout : out STD_LOGIC_VECTOR ( 11 downto 0 );
     wr_en : out STD_LOGIC
   );
@@ -1074,7 +1107,7 @@ architecture STRUCTURE of design_1_camera_capture_0_0 is
 begin
 inst: entity work.design_1_camera_capture_0_0_camera_capture
      port map (
-      addr(17 downto 0) => addr(17 downto 0),
+      addr(18 downto 0) => addr(18 downto 0),
       camera_h_ref => camera_h_ref,
       camera_v_sync => camera_v_sync,
       din(7 downto 0) => din(7 downto 0),

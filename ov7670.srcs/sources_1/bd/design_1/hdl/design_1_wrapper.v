@@ -1,7 +1,7 @@
 //Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2017.2 (lin64) Build 1909853 Thu Jun 15 18:39:10 MDT 2017
-//Date        : Thu Jan  3 00:20:24 2019
+//Date        : Thu Jan  3 19:46:21 2019
 //Host        : yoshiki-FMVA77JRY running 64-bit Ubuntu 18.04.1 LTS
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
@@ -19,11 +19,13 @@ module design_1_wrapper
     camera_v_sync,
     clk_in1,
     cnt_out,
+    cntl_in,
     config_done,
     din,
     pclk,
     pclk_out,
     power_down,
+    resend_in,
     reset,
     sioc,
     siod,
@@ -36,12 +38,14 @@ module design_1_wrapper
   input camera_h_ref;
   input camera_v_sync;
   input clk_in1;
-  output [13:0]cnt_out;
+  output [12:0]cnt_out;
+  input cntl_in;
   output config_done;
   input [7:0]din;
   input pclk;
   output pclk_out;
   output power_down;
+  input resend_in;
   output reset;
   output sioc;
   inout siod;
@@ -55,12 +59,14 @@ module design_1_wrapper
   wire camera_h_ref;
   wire camera_v_sync;
   wire clk_in1;
-  wire [13:0]cnt_out;
+  wire [12:0]cnt_out;
+  wire cntl_in;
   wire config_done;
   wire [7:0]din;
   wire pclk;
   wire pclk_out;
   wire power_down;
+  wire resend_in;
   wire reset;
   wire sioc;
   wire siod;
@@ -76,11 +82,13 @@ module design_1_wrapper
         .camera_v_sync(camera_v_sync),
         .clk_in1(clk_in1),
         .cnt_out(cnt_out),
+        .cntl_in(cntl_in),
         .config_done(config_done),
         .din(din),
         .pclk(pclk),
         .pclk_out(pclk_out),
         .power_down(power_down),
+        .resend_in(resend_in),
         .reset(reset),
         .sioc(sioc),
         .siod(siod),

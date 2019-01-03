@@ -28,13 +28,15 @@ module i2c_controller(
 	input	wire	send,
 	input	wire	[7:0] id,
 	input	wire	[7:0] regs,
+	output  wire    [7:0] div_out,
 	input	wire	[7:0] value
     );
 
-	reg [7:0] divider = 7'b_0000_0001;
+	reg [7:0] divider = 8'b_1111_1100;
 	reg [31:0] busy_sr = 32'h0;
 	reg [31:0] data_sr = 32'h_FFFF_FFFF;
 
+    assign div_out = divider;
     assign siod = (busy_sr[11:10] == 2'b10 || busy_sr[20:19] == 2'b10 || busy_sr[29:28] == 2'b10) ? 1'bz : data_sr[31];
 //	always @(busy_sr or data_sr[31]) begin
 //		if(busy_sr[11:10] == 2'b10 ||
@@ -63,7 +65,7 @@ module i2c_controller(
 		end else begin
 			case ( {busy_sr[31:29], busy_sr[2:0]} )
 				6'b_111111 : begin // start seq #1
-                		  case (divider[7:0])
+                		  case (divider[7:6])
                 		      2'b00   : sioc <= 1'b1;
                 		      2'b01   : sioc <= 1'b1;
                 		      2'b10   : sioc <= 1'b1;

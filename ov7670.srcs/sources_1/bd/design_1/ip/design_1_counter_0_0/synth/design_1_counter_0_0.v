@@ -61,7 +61,7 @@ module design_1_counter_0_0 (
 
 input wire pclk;
 output wire p_out;
-output wire [13 : 0] cnt_out;
+output wire [12 : 0] cnt_out;
 
   counter inst (
     .pclk(pclk),

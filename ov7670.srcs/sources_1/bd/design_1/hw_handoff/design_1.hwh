@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Jan  3 00:20:26 2019" VIVADOVERSION="2017.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Jan  3 19:46:21 2019" VIVADOVERSION="2017.2">
 
   <SYSTEMINFO ARCH="artix7" DEVICE="7a100t" NAME="design_1" PACKAGE="csg324" SPEEDGRADE="-1"/>
 
@@ -82,8 +82,8 @@
     <PORT DIR="I" NAME="pclk" SIGIS="undef" SIGNAME="External_Ports_pclk">
       <CONNECTIONS>
         <CONNECTION INSTANCE="blk_mem_gen_0" PORT="clka"/>
-        <CONNECTION INSTANCE="camera_capture_0" PORT="pclk"/>
         <CONNECTION INSTANCE="counter_0" PORT="pclk"/>
+        <CONNECTION INSTANCE="camera_capture_0" PORT="pclk"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="O" NAME="pclk_out" SIGIS="undef" SIGNAME="counter_0_p_out">
@@ -91,9 +91,19 @@
         <CONNECTION INSTANCE="counter_0" PORT="p_out"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" LEFT="13" NAME="cnt_out" RIGHT="0" SIGIS="undef" SIGNAME="counter_0_cnt_out">
+    <PORT DIR="I" NAME="resend_in" SIGIS="undef" SIGNAME="External_Ports_resend_in">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="button_0" PORT="resend_in"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="12" NAME="cnt_out" RIGHT="0" SIGIS="undef" SIGNAME="counter_0_cnt_out">
       <CONNECTIONS>
         <CONNECTION INSTANCE="counter_0" PORT="cnt_out"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="cntl_in" SIGIS="undef" SIGNAME="External_Ports_cntl_in">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="button_0" PORT="cntl_in"/>
       </CONNECTIONS>
     </PORT>
   </EXTERNALPORTS>
@@ -113,7 +123,7 @@
         <PARAMETER NAME="V_PW" VALUE="5"/>
         <PARAMETER NAME="V_MAX" VALUE="1125"/>
         <PARAMETER NAME="BITS_WIDTH" VALUE="12"/>
-        <PARAMETER NAME="ADDR_WIDTH" VALUE="18"/>
+        <PARAMETER NAME="ADDR_WIDTH" VALUE="19"/>
         <PARAMETER NAME="PIX_WIDTH" VALUE="12"/>
         <PARAMETER NAME="VGABIT_WIDTH" VALUE="4"/>
         <PARAMETER NAME="CAMERA_WIDTH" VALUE="640"/>
@@ -125,6 +135,11 @@
         <PORT CLKFREQUENCY="148437500" DIR="I" NAME="pix_clk" SIGIS="clk" SIGNAME="clk_wiz_0_clk_vga_148_5MHz">
           <CONNECTIONS>
             <CONNECTION INSTANCE="clk_wiz_0" PORT="clk_vga_148_5MHz"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="cntl" SIGIS="undef" SIGNAME="button_0_cntl_out">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="button_0" PORT="cntl_out"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" LEFT="11" NAME="frame_pix" RIGHT="0" SIGIS="undef" SIGNAME="blk_mem_gen_0_doutb">
@@ -157,7 +172,7 @@
             <CONNECTION INSTANCE="External_Ports" PORT="VGA_GREEN"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="17" NAME="frame_addr" RIGHT="0" SIGIS="undef" SIGNAME="VGA_0_frame_addr">
+        <PORT DIR="O" LEFT="18" NAME="frame_addr" RIGHT="0" SIGIS="undef" SIGNAME="VGA_0_frame_addr">
           <CONNECTIONS>
             <CONNECTION INSTANCE="blk_mem_gen_0" PORT="addrb"/>
           </CONNECTIONS>
@@ -201,9 +216,9 @@
         <PARAMETER NAME="C_WRITE_MODE_A" VALUE="WRITE_FIRST"/>
         <PARAMETER NAME="C_WRITE_WIDTH_A" VALUE="12"/>
         <PARAMETER NAME="C_READ_WIDTH_A" VALUE="12"/>
-        <PARAMETER NAME="C_WRITE_DEPTH_A" VALUE="153600"/>
-        <PARAMETER NAME="C_READ_DEPTH_A" VALUE="153600"/>
-        <PARAMETER NAME="C_ADDRA_WIDTH" VALUE="18"/>
+        <PARAMETER NAME="C_WRITE_DEPTH_A" VALUE="307200"/>
+        <PARAMETER NAME="C_READ_DEPTH_A" VALUE="307200"/>
+        <PARAMETER NAME="C_ADDRA_WIDTH" VALUE="19"/>
         <PARAMETER NAME="C_HAS_RSTB" VALUE="0"/>
         <PARAMETER NAME="C_RST_PRIORITY_B" VALUE="CE"/>
         <PARAMETER NAME="C_RSTRAM_B" VALUE="0"/>
@@ -215,11 +230,11 @@
         <PARAMETER NAME="C_WRITE_MODE_B" VALUE="WRITE_FIRST"/>
         <PARAMETER NAME="C_WRITE_WIDTH_B" VALUE="12"/>
         <PARAMETER NAME="C_READ_WIDTH_B" VALUE="12"/>
-        <PARAMETER NAME="C_WRITE_DEPTH_B" VALUE="153600"/>
-        <PARAMETER NAME="C_READ_DEPTH_B" VALUE="153600"/>
-        <PARAMETER NAME="C_ADDRB_WIDTH" VALUE="18"/>
+        <PARAMETER NAME="C_WRITE_DEPTH_B" VALUE="307200"/>
+        <PARAMETER NAME="C_READ_DEPTH_B" VALUE="307200"/>
+        <PARAMETER NAME="C_ADDRB_WIDTH" VALUE="19"/>
         <PARAMETER NAME="C_HAS_MEM_OUTPUT_REGS_A" VALUE="0"/>
-        <PARAMETER NAME="C_HAS_MEM_OUTPUT_REGS_B" VALUE="1"/>
+        <PARAMETER NAME="C_HAS_MEM_OUTPUT_REGS_B" VALUE="0"/>
         <PARAMETER NAME="C_HAS_MUX_OUTPUT_REGS_A" VALUE="0"/>
         <PARAMETER NAME="C_HAS_MUX_OUTPUT_REGS_B" VALUE="0"/>
         <PARAMETER NAME="C_MUX_PIPELINE_STAGES" VALUE="0"/>
@@ -240,9 +255,9 @@
         <PARAMETER NAME="C_EN_SHUTDOWN_PIN" VALUE="0"/>
         <PARAMETER NAME="C_EN_SAFETY_CKT" VALUE="0"/>
         <PARAMETER NAME="C_DISABLE_WARN_BHV_RANGE" VALUE="0"/>
-        <PARAMETER NAME="C_COUNT_36K_BRAM" VALUE="50"/>
-        <PARAMETER NAME="C_COUNT_18K_BRAM" VALUE="4"/>
-        <PARAMETER NAME="C_EST_POWER_SUMMARY" VALUE="Estimated Power for IP     :     17.615336 mW"/>
+        <PARAMETER NAME="C_COUNT_36K_BRAM" VALUE="103"/>
+        <PARAMETER NAME="C_COUNT_18K_BRAM" VALUE="1"/>
+        <PARAMETER NAME="C_EST_POWER_SUMMARY" VALUE="Estimated Power for IP     :     18.117092 mW"/>
         <PARAMETER NAME="Component_Name" VALUE="design_1_blk_mem_gen_0_1"/>
         <PARAMETER NAME="Interface_Type" VALUE="Native"/>
         <PARAMETER NAME="AXI_Type" VALUE="AXI4_Full"/>
@@ -269,7 +284,7 @@
         <PARAMETER NAME="Primitive" VALUE="8kx2"/>
         <PARAMETER NAME="Assume_Synchronous_Clk" VALUE="false"/>
         <PARAMETER NAME="Write_Width_A" VALUE="12"/>
-        <PARAMETER NAME="Write_Depth_A" VALUE="153600"/>
+        <PARAMETER NAME="Write_Depth_A" VALUE="307200"/>
         <PARAMETER NAME="Read_Width_A" VALUE="12"/>
         <PARAMETER NAME="Operating_Mode_A" VALUE="WRITE_FIRST"/>
         <PARAMETER NAME="Enable_A" VALUE="Always_Enabled"/>
@@ -280,7 +295,7 @@
         <PARAMETER NAME="Register_PortA_Output_of_Memory_Primitives" VALUE="false"/>
         <PARAMETER NAME="Register_PortA_Output_of_Memory_Core" VALUE="false"/>
         <PARAMETER NAME="Use_REGCEA_Pin" VALUE="false"/>
-        <PARAMETER NAME="Register_PortB_Output_of_Memory_Primitives" VALUE="true"/>
+        <PARAMETER NAME="Register_PortB_Output_of_Memory_Primitives" VALUE="false"/>
         <PARAMETER NAME="Register_PortB_Output_of_Memory_Core" VALUE="false"/>
         <PARAMETER NAME="Use_REGCEB_Pin" VALUE="false"/>
         <PARAMETER NAME="register_porta_input_of_softecc" VALUE="false"/>
@@ -326,7 +341,7 @@
             <CONNECTION INSTANCE="camera_capture_0" PORT="wr_en"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="17" NAME="addra" RIGHT="0" SIGIS="undef" SIGNAME="camera_capture_0_addr">
+        <PORT DIR="I" LEFT="18" NAME="addra" RIGHT="0" SIGIS="undef" SIGNAME="camera_capture_0_addr">
           <CONNECTIONS>
             <CONNECTION INSTANCE="camera_capture_0" PORT="addr"/>
           </CONNECTIONS>
@@ -341,7 +356,7 @@
             <CONNECTION INSTANCE="clk_wiz_0" PORT="clk_vga_148_5MHz"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="17" NAME="addrb" RIGHT="0" SIGIS="undef" SIGNAME="VGA_0_frame_addr">
+        <PORT DIR="I" LEFT="18" NAME="addrb" RIGHT="0" SIGIS="undef" SIGNAME="VGA_0_frame_addr">
           <CONNECTIONS>
             <CONNECTION INSTANCE="VGA_0" PORT="frame_addr"/>
           </CONNECTIONS>
@@ -380,10 +395,47 @@
         </BUSINTERFACE>
       </BUSINTERFACES>
     </MODULE>
+    <MODULE FULLNAME="/button_0" HWVERSION="1.0" INSTANCE="button_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="button" VLNV="user.org:module_ref:button:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_button_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT CLKFREQUENCY="148437500" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="clk_wiz_0_clk_vga_148_5MHz">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="clk_wiz_0" PORT="clk_vga_148_5MHz"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="resend_in" SIGIS="undef" SIGNAME="External_Ports_resend_in">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="resend_in"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="reset_in" SIGIS="rst"/>
+        <PORT DIR="I" NAME="cntl_in" SIGIS="undef" SIGNAME="External_Ports_cntl_in">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="cntl_in"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="resend_out" SIGIS="undef" SIGNAME="button_0_resend_out">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="camera_controller_0" PORT="resend"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="cntl_out" SIGIS="undef" SIGNAME="button_0_cntl_out">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="VGA_0" PORT="cntl"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="reset_out" SIGIS="rst"/>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
     <MODULE FULLNAME="/camera_capture_0" HWVERSION="1.0" INSTANCE="camera_capture_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="camera_capture" VLNV="user.org:module_ref:camera_capture:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
-        <PARAMETER NAME="ADDR_WIDTH" VALUE="18"/>
+        <PARAMETER NAME="ADDR_WIDTH" VALUE="19"/>
         <PARAMETER NAME="PIX_WIDTH" VALUE="12"/>
         <PARAMETER NAME="DATA_IN_WIDTH" VALUE="8"/>
         <PARAMETER NAME="Component_Name" VALUE="design_1_camera_capture_0_0"/>
@@ -410,7 +462,7 @@
             <CONNECTION INSTANCE="External_Ports" PORT="din"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="17" NAME="addr" RIGHT="0" SIGIS="undef" SIGNAME="camera_capture_0_addr">
+        <PORT DIR="O" LEFT="18" NAME="addr" RIGHT="0" SIGIS="undef" SIGNAME="camera_capture_0_addr">
           <CONNECTIONS>
             <CONNECTION INSTANCE="blk_mem_gen_0" PORT="addra"/>
           </CONNECTIONS>
@@ -435,14 +487,14 @@
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
-        <PORT CLKFREQUENCY="9277343" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="clk_wiz_0_clk_8MHz">
+        <PORT CLKFREQUENCY="11994949" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="clk_wiz_0_clk_12MHz">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="clk_wiz_0" PORT="clk_8MHz"/>
+            <CONNECTION INSTANCE="clk_wiz_0" PORT="clk_12MHz"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="resend" SIGIS="undef" SIGNAME="xlconstant_0_dout">
+        <PORT DIR="I" NAME="resend" SIGIS="undef" SIGNAME="button_0_resend_out">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="xlconstant_0" PORT="dout"/>
+            <CONNECTION INSTANCE="button_0" PORT="resend_out"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="config_done" SIGIS="undef" SIGNAME="camera_controller_0_config_done">
@@ -557,14 +609,14 @@
         <PARAMETER NAME="C_OUTCLK_SUM_ROW0B" VALUE="Clock     Freq (MHz)  (degrees)    (%)     Jitter (ps)  Error (ps)"/>
         <PARAMETER NAME="C_OUTCLK_SUM_ROW1" VALUE="clk_vga_148_5MHz___148.438______0.000______50.0______108.254_____87.466"/>
         <PARAMETER NAME="C_OUTCLK_SUM_ROW2" VALUE="clk_108MHz___107.955______0.000______50.0______114.767_____87.466"/>
-        <PARAMETER NAME="C_OUTCLK_SUM_ROW3" VALUE="clk_8MHz_____9.277______0.000______50.0______191.758_____87.466"/>
+        <PARAMETER NAME="C_OUTCLK_SUM_ROW3" VALUE="clk_12MHz____11.995______0.000______50.0______182.550_____87.466"/>
         <PARAMETER NAME="C_OUTCLK_SUM_ROW4" VALUE="no_CLK_OUT4_output"/>
         <PARAMETER NAME="C_OUTCLK_SUM_ROW5" VALUE="no_CLK_OUT5_output"/>
         <PARAMETER NAME="C_OUTCLK_SUM_ROW6" VALUE="no_CLK_OUT6_output"/>
         <PARAMETER NAME="C_OUTCLK_SUM_ROW7" VALUE="no_CLK_OUT7_output"/>
         <PARAMETER NAME="C_CLKOUT1_REQUESTED_OUT_FREQ" VALUE="148.500"/>
         <PARAMETER NAME="C_CLKOUT2_REQUESTED_OUT_FREQ" VALUE="108"/>
-        <PARAMETER NAME="C_CLKOUT3_REQUESTED_OUT_FREQ" VALUE="8.0"/>
+        <PARAMETER NAME="C_CLKOUT3_REQUESTED_OUT_FREQ" VALUE="12"/>
         <PARAMETER NAME="C_CLKOUT4_REQUESTED_OUT_FREQ" VALUE="100.000"/>
         <PARAMETER NAME="C_CLKOUT5_REQUESTED_OUT_FREQ" VALUE="100.000"/>
         <PARAMETER NAME="C_CLKOUT6_REQUESTED_OUT_FREQ" VALUE="100.000"/>
@@ -585,7 +637,7 @@
         <PARAMETER NAME="C_CLKOUT7_REQUESTED_DUTY_CYCLE" VALUE="50.000"/>
         <PARAMETER NAME="C_CLKOUT1_OUT_FREQ" VALUE="148.438"/>
         <PARAMETER NAME="C_CLKOUT2_OUT_FREQ" VALUE="107.955"/>
-        <PARAMETER NAME="C_CLKOUT3_OUT_FREQ" VALUE="9.277"/>
+        <PARAMETER NAME="C_CLKOUT3_OUT_FREQ" VALUE="11.995"/>
         <PARAMETER NAME="C_CLKOUT4_OUT_FREQ" VALUE="100.000"/>
         <PARAMETER NAME="C_CLKOUT5_OUT_FREQ" VALUE="100.000"/>
         <PARAMETER NAME="C_CLKOUT6_OUT_FREQ" VALUE="100.000"/>
@@ -627,7 +679,7 @@
         <PARAMETER NAME="C_MMCM_STARTUP_WAIT" VALUE="FALSE"/>
         <PARAMETER NAME="C_MMCM_CLKOUT0_DIVIDE_F" VALUE="8.000"/>
         <PARAMETER NAME="C_MMCM_CLKOUT1_DIVIDE" VALUE="11"/>
-        <PARAMETER NAME="C_MMCM_CLKOUT2_DIVIDE" VALUE="128"/>
+        <PARAMETER NAME="C_MMCM_CLKOUT2_DIVIDE" VALUE="99"/>
         <PARAMETER NAME="C_MMCM_CLKOUT3_DIVIDE" VALUE="1"/>
         <PARAMETER NAME="C_MMCM_CLKOUT4_DIVIDE" VALUE="1"/>
         <PARAMETER NAME="C_MMCM_CLKOUT5_DIVIDE" VALUE="1"/>
@@ -689,7 +741,7 @@
         <PARAMETER NAME="C_SECONDARY_PORT" VALUE="clk_in2"/>
         <PARAMETER NAME="C_CLK_OUT1_PORT" VALUE="clk_vga_148_5MHz"/>
         <PARAMETER NAME="C_CLK_OUT2_PORT" VALUE="clk_108MHz"/>
-        <PARAMETER NAME="C_CLK_OUT3_PORT" VALUE="clk_8MHz"/>
+        <PARAMETER NAME="C_CLK_OUT3_PORT" VALUE="clk_12MHz"/>
         <PARAMETER NAME="C_CLK_OUT4_PORT" VALUE="clk_out4"/>
         <PARAMETER NAME="C_CLK_OUT5_PORT" VALUE="clk_out5"/>
         <PARAMETER NAME="C_CLK_OUT6_PORT" VALUE="clk_out6"/>
@@ -758,7 +810,7 @@
         <PARAMETER NAME="C_FILTER_2" VALUE="0000"/>
         <PARAMETER NAME="C_DIVIDE1_AUTO" VALUE="1"/>
         <PARAMETER NAME="C_DIVIDE2_AUTO" VALUE="1.375"/>
-        <PARAMETER NAME="C_DIVIDE3_AUTO" VALUE="18.5625"/>
+        <PARAMETER NAME="C_DIVIDE3_AUTO" VALUE="12.375"/>
         <PARAMETER NAME="C_DIVIDE4_AUTO" VALUE="1.485"/>
         <PARAMETER NAME="C_DIVIDE5_AUTO" VALUE="1.485"/>
         <PARAMETER NAME="C_DIVIDE6_AUTO" VALUE="1.485"/>
@@ -785,7 +837,7 @@
         <PARAMETER NAME="C_CLKOUT7_MATCHED_ROUTING" VALUE="false"/>
         <PARAMETER NAME="C_CLKOUT0_ACTUAL_FREQ" VALUE="148.438"/>
         <PARAMETER NAME="C_CLKOUT1_ACTUAL_FREQ" VALUE="107.955"/>
-        <PARAMETER NAME="C_CLKOUT2_ACTUAL_FREQ" VALUE="9.277"/>
+        <PARAMETER NAME="C_CLKOUT2_ACTUAL_FREQ" VALUE="11.995"/>
         <PARAMETER NAME="C_CLKOUT3_ACTUAL_FREQ" VALUE="100.000"/>
         <PARAMETER NAME="C_CLKOUT4_ACTUAL_FREQ" VALUE="100.000"/>
         <PARAMETER NAME="C_CLKOUT5_ACTUAL_FREQ" VALUE="100.000"/>
@@ -850,7 +902,7 @@
         <PARAMETER NAME="PRIMARY_PORT" VALUE="clk_in1"/>
         <PARAMETER NAME="CLK_OUT1_PORT" VALUE="clk_vga_148_5MHz"/>
         <PARAMETER NAME="CLK_OUT2_PORT" VALUE="clk_108MHz"/>
-        <PARAMETER NAME="CLK_OUT3_PORT" VALUE="clk_8MHz"/>
+        <PARAMETER NAME="CLK_OUT3_PORT" VALUE="clk_12MHz"/>
         <PARAMETER NAME="CLK_OUT4_PORT" VALUE="clk_out4"/>
         <PARAMETER NAME="CLK_OUT5_PORT" VALUE="clk_out5"/>
         <PARAMETER NAME="CLK_OUT6_PORT" VALUE="clk_out6"/>
@@ -872,7 +924,7 @@
         <PARAMETER NAME="CLKOUT2_REQUESTED_OUT_FREQ" VALUE="108"/>
         <PARAMETER NAME="CLKOUT2_REQUESTED_PHASE" VALUE="0.000"/>
         <PARAMETER NAME="CLKOUT2_REQUESTED_DUTY_CYCLE" VALUE="50.000"/>
-        <PARAMETER NAME="CLKOUT3_REQUESTED_OUT_FREQ" VALUE="8.0"/>
+        <PARAMETER NAME="CLKOUT3_REQUESTED_OUT_FREQ" VALUE="12"/>
         <PARAMETER NAME="CLKOUT3_REQUESTED_PHASE" VALUE="0.000"/>
         <PARAMETER NAME="CLKOUT3_REQUESTED_DUTY_CYCLE" VALUE="50.000"/>
         <PARAMETER NAME="CLKOUT4_REQUESTED_OUT_FREQ" VALUE="100.000"/>
@@ -957,7 +1009,7 @@
         <PARAMETER NAME="MMCM_CLKOUT1_DUTY_CYCLE" VALUE="0.500"/>
         <PARAMETER NAME="MMCM_CLKOUT1_PHASE" VALUE="0.000"/>
         <PARAMETER NAME="MMCM_CLKOUT1_USE_FINE_PS" VALUE="false"/>
-        <PARAMETER NAME="MMCM_CLKOUT2_DIVIDE" VALUE="128"/>
+        <PARAMETER NAME="MMCM_CLKOUT2_DIVIDE" VALUE="99"/>
         <PARAMETER NAME="MMCM_CLKOUT2_DUTY_CYCLE" VALUE="0.500"/>
         <PARAMETER NAME="MMCM_CLKOUT2_PHASE" VALUE="0.000"/>
         <PARAMETER NAME="MMCM_CLKOUT2_USE_FINE_PS" VALUE="false"/>
@@ -1031,7 +1083,7 @@
         <PARAMETER NAME="CLKOUT1_PHASE_ERROR" VALUE="87.466"/>
         <PARAMETER NAME="CLKOUT2_JITTER" VALUE="114.767"/>
         <PARAMETER NAME="CLKOUT2_PHASE_ERROR" VALUE="87.466"/>
-        <PARAMETER NAME="CLKOUT3_JITTER" VALUE="191.758"/>
+        <PARAMETER NAME="CLKOUT3_JITTER" VALUE="182.550"/>
         <PARAMETER NAME="CLKOUT3_PHASE_ERROR" VALUE="87.466"/>
         <PARAMETER NAME="CLKOUT4_JITTER" VALUE="0.0"/>
         <PARAMETER NAME="CLKOUT4_PHASE_ERROR" VALUE="0.0"/>
@@ -1061,16 +1113,17 @@
         <PORT CLKFREQUENCY="148437500" DIR="O" NAME="clk_vga_148_5MHz" SIGIS="clk" SIGNAME="clk_wiz_0_clk_vga_148_5MHz">
           <CONNECTIONS>
             <CONNECTION INSTANCE="blk_mem_gen_0" PORT="clkb"/>
+            <CONNECTION INSTANCE="button_0" PORT="clk"/>
             <CONNECTION INSTANCE="VGA_0" PORT="pix_clk"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="locked" SIGIS="undef"/>
         <PORT CLKFREQUENCY="107954545" DIR="O" NAME="clk_108MHz" SIGIS="clk"/>
-        <PORT CLKFREQUENCY="9277343" DIR="O" NAME="clk_8MHz" SIGIS="clk" SIGNAME="clk_wiz_0_clk_8MHz">
+        <PORT CLKFREQUENCY="11994949" DIR="O" NAME="clk_12MHz" SIGIS="clk" SIGNAME="clk_wiz_0_clk_12MHz">
           <CONNECTIONS>
             <CONNECTION INSTANCE="camera_controller_0" PORT="clk"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="O" NAME="locked" SIGIS="undef"/>
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>
@@ -1091,26 +1144,9 @@
             <CONNECTION INSTANCE="External_Ports" PORT="pclk_out"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="13" NAME="cnt_out" RIGHT="0" SIGIS="undef" SIGNAME="counter_0_cnt_out">
+        <PORT DIR="O" LEFT="12" NAME="cnt_out" RIGHT="0" SIGIS="undef" SIGNAME="counter_0_cnt_out">
           <CONNECTIONS>
             <CONNECTION INSTANCE="External_Ports" PORT="cnt_out"/>
-          </CONNECTIONS>
-        </PORT>
-      </PORTS>
-      <BUSINTERFACES/>
-    </MODULE>
-    <MODULE FULLNAME="/xlconstant_0" HWVERSION="1.1" INSTANCE="xlconstant_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
-      <DOCUMENTS/>
-      <PARAMETERS>
-        <PARAMETER NAME="CONST_WIDTH" VALUE="1"/>
-        <PARAMETER NAME="CONST_VAL" VALUE="0x0"/>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_xlconstant_0_0"/>
-        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
-      </PARAMETERS>
-      <PORTS>
-        <PORT DIR="O" LEFT="0" NAME="dout" RIGHT="0" SIGIS="undef" SIGNAME="xlconstant_0_dout">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="camera_controller_0" PORT="resend"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>

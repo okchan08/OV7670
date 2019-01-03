@@ -21,7 +21,7 @@
 
 
 module camera_capture#(
-	parameter ADDR_WIDTH = 18,
+	parameter ADDR_WIDTH = 19,
 	parameter PIX_WIDTH = 12,
 	parameter DATA_IN_WIDTH = 8
     )

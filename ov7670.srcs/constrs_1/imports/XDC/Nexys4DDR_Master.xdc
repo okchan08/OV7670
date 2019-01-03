@@ -7,8 +7,18 @@
 set_property -dict {PACKAGE_PIN E3 IOSTANDARD LVCMOS33} [get_ports clk_in1]
 create_clock -period 10.000 -name sys_clk_pin -waveform {0.000 5.000} -add [get_ports clk_in1]
 
+# Clock constrains
+#set_clock_group -asynchronous -group [get_clocks [list  [get_clocks -of_objects [get_pins design_1_i/clk_wiz_0/inst/mmcm_adv_inst/CLKOUT0]]]] -group [get_clocks [list  [get_clocks -of_objects [get_pins design_1_i/clk_wiz_0/inst/mmcm_adv_inst/CLKOUT2]]]]
+
 # PCLK property
 set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets pclk_IBUF]
+
+#Resend i2c data push BTNC
+set_property -dict {PACKAGE_PIN N17 IOSTANDARD LVCMOS33} [get_ports resend_in]
+
+#switch VGA output
+set_property -dict {PACKAGE_PIN J15 IOSTANDARD LVCMOS33} [get_ports cntl_in]
+
 
 
 ##Switches
@@ -34,9 +44,7 @@ set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets pclk_IBUF]
 ## LEDs
 
 
-set_property -dict {PACKAGE_PIN H17 IOSTANDARD LVCMOS33} [get_ports config_done]
-#set_property -dict {PACKAGE_PIN H17 IOSTANDARD LVCMOS33} [get_ports tmp]
-set_property -dict {PACKAGE_PIN K15 IOSTANDARD LVCMOS33} [get_ports pclk_out]
+set_property -dict {PACKAGE_PIN K15 IOSTANDARD LVCMOS33} [get_ports config_done]
 set_property -dict {PACKAGE_PIN J13 IOSTANDARD LVCMOS33} [get_ports {cnt_out[0]}]
 set_property -dict {PACKAGE_PIN N14 IOSTANDARD LVCMOS33} [get_ports {cnt_out[1]}]
 set_property -dict {PACKAGE_PIN R18 IOSTANDARD LVCMOS33} [get_ports {cnt_out[2]}]
@@ -50,7 +58,7 @@ set_property -dict {PACKAGE_PIN T16 IOSTANDARD LVCMOS33} [get_ports {cnt_out[9]}
 set_property -dict {PACKAGE_PIN V15 IOSTANDARD LVCMOS33} [get_ports {cnt_out[10]}]
 set_property -dict {PACKAGE_PIN V14 IOSTANDARD LVCMOS33} [get_ports {cnt_out[11]}]
 set_property -dict {PACKAGE_PIN V12 IOSTANDARD LVCMOS33} [get_ports {cnt_out[12]}]
-set_property -dict {PACKAGE_PIN V11 IOSTANDARD LVCMOS33} [get_ports {cnt_out[13]}]
+set_property -dict {PACKAGE_PIN V11 IOSTANDARD LVCMOS33} [get_ports pclk_out]
 
 #set_property -dict { PACKAGE_PIN R12   IOSTANDARD LVCMOS33 } [get_ports { LED16_B }]; #IO_L5P_T0_D06_14 Sch=led16_b
 #set_property -dict { PACKAGE_PIN M16   IOSTANDARD LVCMOS33 } [get_ports { LED16_G }]; #IO_L10P_T1_D14_14 Sch=led16_g
@@ -256,6 +264,11 @@ set_property -dict {PACKAGE_PIN B12 IOSTANDARD LVCMOS33} [get_ports VGA_V_SYNC]
 #set_property -dict { PACKAGE_PIN M14   IOSTANDARD LVCMOS33 } [get_ports { QSPI_DQ[3] }]; #IO_L2N_T0_D03_14 Sch=qspi_dq[3]
 #set_property -dict { PACKAGE_PIN L13   IOSTANDARD LVCMOS33 } [get_ports { QSPI_CSN }]; #IO_L6P_T0_FCS_B_14 Sch=qspi_csn
 
+
+connect_debug_port u_ila_1/probe4 [get_nets [list design_1_i/camera_capture_0_wr_en]]
+
+
+
 create_debug_core u_ila_0 ila
 set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0]
 set_property ALL_PROBE_SAME_MU_CNT 1 [get_debug_cores u_ila_0]
@@ -266,31 +279,57 @@ set_property C_INPUT_PIPE_STAGES 0 [get_debug_cores u_ila_0]
 set_property C_TRIGIN_EN false [get_debug_cores u_ila_0]
 set_property C_TRIGOUT_EN false [get_debug_cores u_ila_0]
 set_property port_width 1 [get_debug_ports u_ila_0/clk]
-connect_debug_port u_ila_0/clk [get_nets [list design_1_i/clk_wiz_0/inst/clk_108MHz]]
+connect_debug_port u_ila_0/clk [get_nets [list design_1_i/clk_wiz_0/inst/clk_12MHz]]
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe0]
-set_property port_width 12 [get_debug_ports u_ila_0/probe0]
-connect_debug_port u_ila_0/probe0 [get_nets [list {design_1_i/camera_capture_0_dout[0]} {design_1_i/camera_capture_0_dout[1]} {design_1_i/camera_capture_0_dout[2]} {design_1_i/camera_capture_0_dout[3]} {design_1_i/camera_capture_0_dout[4]} {design_1_i/camera_capture_0_dout[5]} {design_1_i/camera_capture_0_dout[6]} {design_1_i/camera_capture_0_dout[7]} {design_1_i/camera_capture_0_dout[8]} {design_1_i/camera_capture_0_dout[9]} {design_1_i/camera_capture_0_dout[10]} {design_1_i/camera_capture_0_dout[11]}]]
+set_property port_width 1 [get_debug_ports u_ila_0/probe0]
+connect_debug_port u_ila_0/probe0 [get_nets [list design_1_i/camera_controller_0_config_done]]
+create_debug_core u_ila_1 ila
+set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_1]
+set_property ALL_PROBE_SAME_MU_CNT 1 [get_debug_cores u_ila_1]
+set_property C_ADV_TRIGGER false [get_debug_cores u_ila_1]
+set_property C_DATA_DEPTH 2048 [get_debug_cores u_ila_1]
+set_property C_EN_STRG_QUAL false [get_debug_cores u_ila_1]
+set_property C_INPUT_PIPE_STAGES 0 [get_debug_cores u_ila_1]
+set_property C_TRIGIN_EN false [get_debug_cores u_ila_1]
+set_property C_TRIGOUT_EN false [get_debug_cores u_ila_1]
+set_property port_width 1 [get_debug_ports u_ila_1/clk]
+connect_debug_port u_ila_1/clk [get_nets [list design_1_i/clk_wiz_0/inst/clk_vga_148_5MHz]]
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe0]
+set_property port_width 19 [get_debug_ports u_ila_1/probe0]
+connect_debug_port u_ila_1/probe0 [get_nets [list {design_1_i/VGA_0_frame_addr[0]} {design_1_i/VGA_0_frame_addr[1]} {design_1_i/VGA_0_frame_addr[2]} {design_1_i/VGA_0_frame_addr[3]} {design_1_i/VGA_0_frame_addr[4]} {design_1_i/VGA_0_frame_addr[5]} {design_1_i/VGA_0_frame_addr[6]} {design_1_i/VGA_0_frame_addr[7]} {design_1_i/VGA_0_frame_addr[8]} {design_1_i/VGA_0_frame_addr[9]} {design_1_i/VGA_0_frame_addr[10]} {design_1_i/VGA_0_frame_addr[11]} {design_1_i/VGA_0_frame_addr[12]} {design_1_i/VGA_0_frame_addr[13]} {design_1_i/VGA_0_frame_addr[14]} {design_1_i/VGA_0_frame_addr[15]} {design_1_i/VGA_0_frame_addr[16]} {design_1_i/VGA_0_frame_addr[17]} {design_1_i/VGA_0_frame_addr[18]}]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe1]
-set_property port_width 12 [get_debug_ports u_ila_0/probe1]
-connect_debug_port u_ila_0/probe1 [get_nets [list {design_1_i/blk_mem_gen_0_doutb[0]} {design_1_i/blk_mem_gen_0_doutb[1]} {design_1_i/blk_mem_gen_0_doutb[2]} {design_1_i/blk_mem_gen_0_doutb[3]} {design_1_i/blk_mem_gen_0_doutb[4]} {design_1_i/blk_mem_gen_0_doutb[5]} {design_1_i/blk_mem_gen_0_doutb[6]} {design_1_i/blk_mem_gen_0_doutb[7]} {design_1_i/blk_mem_gen_0_doutb[8]} {design_1_i/blk_mem_gen_0_doutb[9]} {design_1_i/blk_mem_gen_0_doutb[10]} {design_1_i/blk_mem_gen_0_doutb[11]}]]
+set_property port_width 1 [get_debug_ports u_ila_0/probe1]
+connect_debug_port u_ila_0/probe1 [get_nets [list design_1_i/camera_controller_0_sioc]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe2]
-set_property port_width 18 [get_debug_ports u_ila_0/probe2]
-connect_debug_port u_ila_0/probe2 [get_nets [list {design_1_i/VGA_0_frame_addr[0]} {design_1_i/VGA_0_frame_addr[1]} {design_1_i/VGA_0_frame_addr[2]} {design_1_i/VGA_0_frame_addr[3]} {design_1_i/VGA_0_frame_addr[4]} {design_1_i/VGA_0_frame_addr[5]} {design_1_i/VGA_0_frame_addr[6]} {design_1_i/VGA_0_frame_addr[7]} {design_1_i/VGA_0_frame_addr[8]} {design_1_i/VGA_0_frame_addr[9]} {design_1_i/VGA_0_frame_addr[10]} {design_1_i/VGA_0_frame_addr[11]} {design_1_i/VGA_0_frame_addr[12]} {design_1_i/VGA_0_frame_addr[13]} {design_1_i/VGA_0_frame_addr[14]} {design_1_i/VGA_0_frame_addr[15]} {design_1_i/VGA_0_frame_addr[16]} {design_1_i/VGA_0_frame_addr[17]}]]
-create_debug_port u_ila_0 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe3]
-set_property port_width 18 [get_debug_ports u_ila_0/probe3]
-connect_debug_port u_ila_0/probe3 [get_nets [list {design_1_i/camera_capture_0_addr[0]} {design_1_i/camera_capture_0_addr[1]} {design_1_i/camera_capture_0_addr[2]} {design_1_i/camera_capture_0_addr[3]} {design_1_i/camera_capture_0_addr[4]} {design_1_i/camera_capture_0_addr[5]} {design_1_i/camera_capture_0_addr[6]} {design_1_i/camera_capture_0_addr[7]} {design_1_i/camera_capture_0_addr[8]} {design_1_i/camera_capture_0_addr[9]} {design_1_i/camera_capture_0_addr[10]} {design_1_i/camera_capture_0_addr[11]} {design_1_i/camera_capture_0_addr[12]} {design_1_i/camera_capture_0_addr[13]} {design_1_i/camera_capture_0_addr[14]} {design_1_i/camera_capture_0_addr[15]} {design_1_i/camera_capture_0_addr[16]} {design_1_i/camera_capture_0_addr[17]}]]
-create_debug_port u_ila_0 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe4]
-set_property port_width 1 [get_debug_ports u_ila_0/probe4]
-connect_debug_port u_ila_0/probe4 [get_nets [list design_1_i/camera_capture_0_wr_en]]
-create_debug_port u_ila_0 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe5]
-set_property port_width 1 [get_debug_ports u_ila_0/probe5]
-connect_debug_port u_ila_0/probe5 [get_nets [list design_1_i/counter_0_p_out]]
+set_property port_width 1 [get_debug_ports u_ila_0/probe2]
+connect_debug_port u_ila_0/probe2 [get_nets [list design_1_i/camera_controller_0_xclk]]
+create_debug_port u_ila_1 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe1]
+set_property port_width 12 [get_debug_ports u_ila_1/probe1]
+connect_debug_port u_ila_1/probe1 [get_nets [list {design_1_i/camera_capture_0_dout[0]} {design_1_i/camera_capture_0_dout[1]} {design_1_i/camera_capture_0_dout[2]} {design_1_i/camera_capture_0_dout[3]} {design_1_i/camera_capture_0_dout[4]} {design_1_i/camera_capture_0_dout[5]} {design_1_i/camera_capture_0_dout[6]} {design_1_i/camera_capture_0_dout[7]} {design_1_i/camera_capture_0_dout[8]} {design_1_i/camera_capture_0_dout[9]} {design_1_i/camera_capture_0_dout[10]} {design_1_i/camera_capture_0_dout[11]}]]
+create_debug_port u_ila_1 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe2]
+set_property port_width 12 [get_debug_ports u_ila_1/probe2]
+connect_debug_port u_ila_1/probe2 [get_nets [list {design_1_i/blk_mem_gen_0_doutb[0]} {design_1_i/blk_mem_gen_0_doutb[1]} {design_1_i/blk_mem_gen_0_doutb[2]} {design_1_i/blk_mem_gen_0_doutb[3]} {design_1_i/blk_mem_gen_0_doutb[4]} {design_1_i/blk_mem_gen_0_doutb[5]} {design_1_i/blk_mem_gen_0_doutb[6]} {design_1_i/blk_mem_gen_0_doutb[7]} {design_1_i/blk_mem_gen_0_doutb[8]} {design_1_i/blk_mem_gen_0_doutb[9]} {design_1_i/blk_mem_gen_0_doutb[10]} {design_1_i/blk_mem_gen_0_doutb[11]}]]
+create_debug_port u_ila_1 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe3]
+set_property port_width 19 [get_debug_ports u_ila_1/probe3]
+connect_debug_port u_ila_1/probe3 [get_nets [list {design_1_i/camera_capture_0_addr[0]} {design_1_i/camera_capture_0_addr[1]} {design_1_i/camera_capture_0_addr[2]} {design_1_i/camera_capture_0_addr[3]} {design_1_i/camera_capture_0_addr[4]} {design_1_i/camera_capture_0_addr[5]} {design_1_i/camera_capture_0_addr[6]} {design_1_i/camera_capture_0_addr[7]} {design_1_i/camera_capture_0_addr[8]} {design_1_i/camera_capture_0_addr[9]} {design_1_i/camera_capture_0_addr[10]} {design_1_i/camera_capture_0_addr[11]} {design_1_i/camera_capture_0_addr[12]} {design_1_i/camera_capture_0_addr[13]} {design_1_i/camera_capture_0_addr[14]} {design_1_i/camera_capture_0_addr[15]} {design_1_i/camera_capture_0_addr[16]} {design_1_i/camera_capture_0_addr[17]} {design_1_i/camera_capture_0_addr[18]}]]
+create_debug_port u_ila_1 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe4]
+set_property port_width 1 [get_debug_ports u_ila_1/probe4]
+connect_debug_port u_ila_1/probe4 [get_nets [list design_1_i/camera_h_ref_1]]
+create_debug_port u_ila_1 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe5]
+set_property port_width 1 [get_debug_ports u_ila_1/probe5]
+connect_debug_port u_ila_1/probe5 [get_nets [list design_1_i/camera_v_sync_1]]
+create_debug_port u_ila_1 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe6]
+set_property port_width 1 [get_debug_ports u_ila_1/probe6]
+connect_debug_port u_ila_1/probe6 [get_nets [list design_1_i/counter_0_p_out]]
 set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
 set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
 set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
-connect_debug_port dbg_hub/clk [get_nets u_ila_0_clk_108MHz]
+connect_debug_port dbg_hub/clk [get_nets u_ila_1_clk_vga_148_5MHz]

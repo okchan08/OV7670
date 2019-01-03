@@ -1,8 +1,8 @@
 // Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2017.2 (lin64) Build 1909853 Thu Jun 15 18:39:10 MDT 2017
-// Date        : Fri Jul  6 21:43:27 2018
-// Host        : yoshiki-FMVA77JRY running 64-bit Ubuntu 18.04 LTS
+// Date        : Thu Jan  3 16:34:14 2019
+// Host        : yoshiki-FMVA77JRY running 64-bit Ubuntu 18.04.1 LTS
 // Command     : write_verilog -force -mode funcsim
 //               /home/yoshiki/xilinx/nexys4/ov7670/ov7670.srcs/sources_1/bd/design_1/ip/design_1_camera_controller_0_0/design_1_camera_controller_0_0_sim_netlist.v
 // Design      : design_1_camera_controller_0_0
@@ -720,8 +720,9 @@ module design_1_camera_controller_0_0_i2c_controller
   wire \data_sr_reg_n_0_[7] ;
   wire \data_sr_reg_n_0_[8] ;
   wire \data_sr_reg_n_0_[9] ;
-  wire [7:6]divider_reg__0;
-  wire [5:0]divider_reg__1;
+  wire [5:0]divider_reg__0;
+  wire \divider_reg_n_0_[6] ;
+  wire \divider_reg_n_0_[7] ;
   wire p_0_in;
   wire [7:0]p_0_in__0;
   wire [0:0]p_1_in;
@@ -746,8 +747,8 @@ module design_1_camera_controller_0_0_i2c_controller
     .INIT(64'h4000FFFF40004000)) 
     \busy_sr[0]_i_1 
        (.I0(\busy_sr[0]_i_3_n_0 ),
-        .I1(divider_reg__0[6]),
-        .I2(divider_reg__0[7]),
+        .I1(\divider_reg_n_0_[6] ),
+        .I2(\divider_reg_n_0_[7] ),
         .I3(p_0_in),
         .I4(\busy_sr_reg[1]_0 ),
         .I5(p_1_in),
@@ -755,31 +756,31 @@ module design_1_camera_controller_0_0_i2c_controller
   LUT6 #(
     .INIT(64'h7FFFFFFFFFFFFFFF)) 
     \busy_sr[0]_i_3 
-       (.I0(divider_reg__1[4]),
-        .I1(divider_reg__1[2]),
-        .I2(divider_reg__1[0]),
-        .I3(divider_reg__1[1]),
-        .I4(divider_reg__1[3]),
-        .I5(divider_reg__1[5]),
+       (.I0(divider_reg__0[4]),
+        .I1(divider_reg__0[2]),
+        .I2(divider_reg__0[0]),
+        .I3(divider_reg__0[1]),
+        .I4(divider_reg__0[3]),
+        .I5(divider_reg__0[5]),
         .O(\busy_sr[0]_i_3_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair4" *) 
   LUT5 #(
     .INIT(32'hFFFFFFFE)) 
     \busy_sr[0]_i_4 
-       (.I0(divider_reg__1[2]),
-        .I1(divider_reg__1[3]),
-        .I2(divider_reg__1[0]),
-        .I3(divider_reg__1[1]),
+       (.I0(divider_reg__0[2]),
+        .I1(divider_reg__0[3]),
+        .I2(divider_reg__0[0]),
+        .I3(divider_reg__0[1]),
         .I4(\busy_sr[0]_i_5_n_0 ),
         .O(\busy_sr_reg[1]_0 ));
   (* SOFT_HLUTNM = "soft_lutpair9" *) 
   LUT4 #(
     .INIT(16'hFFFE)) 
     \busy_sr[0]_i_5 
-       (.I0(divider_reg__1[5]),
-        .I1(divider_reg__1[4]),
-        .I2(divider_reg__0[7]),
-        .I3(divider_reg__0[6]),
+       (.I0(divider_reg__0[5]),
+        .I1(divider_reg__0[4]),
+        .I2(\divider_reg_n_0_[7] ),
+        .I3(\divider_reg_n_0_[6] ),
         .O(\busy_sr[0]_i_5_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair28" *) 
   LUT2 #(
@@ -948,8 +949,8 @@ module design_1_camera_controller_0_0_i2c_controller
        (.I0(p_1_in),
         .I1(\busy_sr_reg[1]_0 ),
         .I2(p_0_in),
-        .I3(divider_reg__0[7]),
-        .I4(divider_reg__0[6]),
+        .I3(\divider_reg_n_0_[7] ),
+        .I4(\divider_reg_n_0_[6] ),
         .I5(\busy_sr[0]_i_3_n_0 ),
         .O(\busy_sr[31]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair6" *) 
@@ -1671,74 +1672,74 @@ module design_1_camera_controller_0_0_i2c_controller
   LUT1 #(
     .INIT(2'h1)) 
     \divider[0]_i_1 
-       (.I0(divider_reg__1[0]),
+       (.I0(divider_reg__0[0]),
         .O(p_0_in__0[0]));
   (* SOFT_HLUTNM = "soft_lutpair34" *) 
   LUT2 #(
     .INIT(4'h6)) 
     \divider[1]_i_1 
-       (.I0(divider_reg__1[0]),
-        .I1(divider_reg__1[1]),
+       (.I0(divider_reg__0[0]),
+        .I1(divider_reg__0[1]),
         .O(p_0_in__0[1]));
   (* SOFT_HLUTNM = "soft_lutpair5" *) 
   LUT3 #(
     .INIT(8'h78)) 
     \divider[2]_i_1 
-       (.I0(divider_reg__1[1]),
-        .I1(divider_reg__1[0]),
-        .I2(divider_reg__1[2]),
+       (.I0(divider_reg__0[1]),
+        .I1(divider_reg__0[0]),
+        .I2(divider_reg__0[2]),
         .O(p_0_in__0[2]));
   (* SOFT_HLUTNM = "soft_lutpair4" *) 
   LUT4 #(
     .INIT(16'h7F80)) 
     \divider[3]_i_1 
-       (.I0(divider_reg__1[2]),
-        .I1(divider_reg__1[0]),
-        .I2(divider_reg__1[1]),
-        .I3(divider_reg__1[3]),
+       (.I0(divider_reg__0[2]),
+        .I1(divider_reg__0[0]),
+        .I2(divider_reg__0[1]),
+        .I3(divider_reg__0[3]),
         .O(p_0_in__0[3]));
   (* SOFT_HLUTNM = "soft_lutpair5" *) 
   LUT5 #(
     .INIT(32'h7FFF8000)) 
     \divider[4]_i_1 
-       (.I0(divider_reg__1[3]),
-        .I1(divider_reg__1[1]),
-        .I2(divider_reg__1[0]),
-        .I3(divider_reg__1[2]),
-        .I4(divider_reg__1[4]),
+       (.I0(divider_reg__0[3]),
+        .I1(divider_reg__0[1]),
+        .I2(divider_reg__0[0]),
+        .I3(divider_reg__0[2]),
+        .I4(divider_reg__0[4]),
         .O(p_0_in__0[4]));
   LUT6 #(
     .INIT(64'h7FFFFFFF80000000)) 
     \divider[5]_i_1 
-       (.I0(divider_reg__1[4]),
-        .I1(divider_reg__1[2]),
-        .I2(divider_reg__1[0]),
-        .I3(divider_reg__1[1]),
-        .I4(divider_reg__1[3]),
-        .I5(divider_reg__1[5]),
+       (.I0(divider_reg__0[4]),
+        .I1(divider_reg__0[2]),
+        .I2(divider_reg__0[0]),
+        .I3(divider_reg__0[1]),
+        .I4(divider_reg__0[3]),
+        .I5(divider_reg__0[5]),
         .O(p_0_in__0[5]));
   (* SOFT_HLUTNM = "soft_lutpair33" *) 
   LUT2 #(
     .INIT(4'h9)) 
     \divider[6]_i_1 
        (.I0(\busy_sr[0]_i_3_n_0 ),
-        .I1(divider_reg__0[6]),
+        .I1(\divider_reg_n_0_[6] ),
         .O(p_0_in__0[6]));
   (* SOFT_HLUTNM = "soft_lutpair9" *) 
   LUT3 #(
     .INIT(8'hD2)) 
     \divider[7]_i_2 
-       (.I0(divider_reg__0[6]),
+       (.I0(\divider_reg_n_0_[6] ),
         .I1(\busy_sr[0]_i_3_n_0 ),
-        .I2(divider_reg__0[7]),
+        .I2(\divider_reg_n_0_[7] ),
         .O(p_0_in__0[7]));
   FDRE #(
-    .INIT(1'b1)) 
+    .INIT(1'b0)) 
     \divider_reg[0] 
        (.C(clk),
         .CE(E),
         .D(p_0_in__0[0]),
-        .Q(divider_reg__1[0]),
+        .Q(divider_reg__0[0]),
         .R(1'b0));
   FDRE #(
     .INIT(1'b0)) 
@@ -1746,55 +1747,55 @@ module design_1_camera_controller_0_0_i2c_controller
        (.C(clk),
         .CE(E),
         .D(p_0_in__0[1]),
-        .Q(divider_reg__1[1]),
+        .Q(divider_reg__0[1]),
         .R(1'b0));
   FDRE #(
-    .INIT(1'b0)) 
+    .INIT(1'b1)) 
     \divider_reg[2] 
        (.C(clk),
         .CE(E),
         .D(p_0_in__0[2]),
-        .Q(divider_reg__1[2]),
+        .Q(divider_reg__0[2]),
         .R(1'b0));
   FDRE #(
-    .INIT(1'b0)) 
+    .INIT(1'b1)) 
     \divider_reg[3] 
        (.C(clk),
         .CE(E),
         .D(p_0_in__0[3]),
-        .Q(divider_reg__1[3]),
+        .Q(divider_reg__0[3]),
         .R(1'b0));
   FDRE #(
-    .INIT(1'b0)) 
+    .INIT(1'b1)) 
     \divider_reg[4] 
        (.C(clk),
         .CE(E),
         .D(p_0_in__0[4]),
-        .Q(divider_reg__1[4]),
+        .Q(divider_reg__0[4]),
         .R(1'b0));
   FDRE #(
-    .INIT(1'b0)) 
+    .INIT(1'b1)) 
     \divider_reg[5] 
        (.C(clk),
         .CE(E),
         .D(p_0_in__0[5]),
-        .Q(divider_reg__1[5]),
+        .Q(divider_reg__0[5]),
         .R(1'b0));
   FDRE #(
-    .INIT(1'b0)) 
+    .INIT(1'b1)) 
     \divider_reg[6] 
        (.C(clk),
         .CE(E),
         .D(p_0_in__0[6]),
-        .Q(divider_reg__0[6]),
+        .Q(\divider_reg_n_0_[6] ),
         .R(1'b0));
   FDRE #(
-    .INIT(1'b0)) 
+    .INIT(1'b1)) 
     \divider_reg[7] 
        (.C(clk),
         .CE(E),
         .D(p_0_in__0[7]),
-        .Q(divider_reg__0[7]),
+        .Q(\divider_reg_n_0_[7] ),
         .R(1'b0));
   LUT6 #(
     .INIT(64'hFCFCFFF8FFFFFFFF)) 
@@ -1810,8 +1811,8 @@ module design_1_camera_controller_0_0_i2c_controller
   LUT2 #(
     .INIT(4'h6)) 
     sioc_i_2
-       (.I0(divider_reg__0[6]),
-        .I1(divider_reg__0[7]),
+       (.I0(\divider_reg_n_0_[6] ),
+        .I1(\divider_reg_n_0_[7] ),
         .O(sioc_i_2_n_0));
   (* SOFT_HLUTNM = "soft_lutpair6" *) 
   LUT4 #(
@@ -1819,7 +1820,7 @@ module design_1_camera_controller_0_0_i2c_controller
     sioc_i_3
        (.I0(sioc_i_5_n_0),
         .I1(\busy_sr_reg_n_0_[30] ),
-        .I2(divider_reg__0[6]),
+        .I2(\divider_reg_n_0_[6] ),
         .I3(p_0_in),
         .O(sioc_i_3_n_0));
   (* SOFT_HLUTNM = "soft_lutpair7" *) 

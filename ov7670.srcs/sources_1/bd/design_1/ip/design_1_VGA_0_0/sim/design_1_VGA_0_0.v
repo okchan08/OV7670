@@ -1,4 +1,4 @@
-// (c) Copyright 1995-2018 Xilinx, Inc. All rights reserved.
+// (c) Copyright 1995-2019 Xilinx, Inc. All rights reserved.
 // 
 // This file contains confidential and proprietary information
 // of Xilinx, Inc. and is protected under U.S. and
@@ -55,6 +55,7 @@
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module design_1_VGA_0_0 (
   pix_clk,
+  cntl,
   frame_pix,
   VGA_H_SYNC,
   VGA_V_SYNC,
@@ -66,13 +67,14 @@ module design_1_VGA_0_0 (
 
 (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 pix_clk CLK" *)
 input wire pix_clk;
+input wire cntl;
 input wire [11 : 0] frame_pix;
 output wire VGA_H_SYNC;
 output wire VGA_V_SYNC;
 output wire [3 : 0] VGA_RED;
 output wire [3 : 0] VGA_BLUE;
 output wire [3 : 0] VGA_GREEN;
-output wire [17 : 0] frame_addr;
+output wire [18 : 0] frame_addr;
 
   VGA #(
     .FRAME_WIDTH(1920),
@@ -84,13 +86,14 @@ output wire [17 : 0] frame_addr;
     .V_PW(5),
     .V_MAX(1125),
     .BITS_WIDTH(12),
-    .ADDR_WIDTH(18),
+    .ADDR_WIDTH(19),
     .PIX_WIDTH(12),
     .VGABIT_WIDTH(4),
     .CAMERA_WIDTH(640),
     .CAMERA_HEIGHT(480)
   ) inst (
     .pix_clk(pix_clk),
+    .cntl(cntl),
     .frame_pix(frame_pix),
     .VGA_H_SYNC(VGA_H_SYNC),
     .VGA_V_SYNC(VGA_V_SYNC),

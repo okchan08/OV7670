@@ -1,4 +1,4 @@
-// (c) Copyright 1995-2018 Xilinx, Inc. All rights reserved.
+// (c) Copyright 1995-2019 Xilinx, Inc. All rights reserved.
 // 
 // This file contains confidential and proprietary information
 // of Xilinx, Inc. and is protected under U.S. and
@@ -67,12 +67,12 @@ input wire pclk;
 input wire camera_v_sync;
 input wire camera_h_ref;
 input wire [7 : 0] din;
-output wire [17 : 0] addr;
+output wire [18 : 0] addr;
 output wire [11 : 0] dout;
 output wire wr_en;
 
   camera_capture #(
-    .ADDR_WIDTH(18),
+    .ADDR_WIDTH(19),
     .PIX_WIDTH(12),
     .DATA_IN_WIDTH(8)
   ) inst (

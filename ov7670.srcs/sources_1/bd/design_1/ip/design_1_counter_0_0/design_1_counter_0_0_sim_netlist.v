@@ -1,7 +1,7 @@
 // Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2017.2 (lin64) Build 1909853 Thu Jun 15 18:39:10 MDT 2017
-// Date        : Wed Jan  2 23:45:19 2019
+// Date        : Thu Jan  3 16:46:30 2019
 // Host        : yoshiki-FMVA77JRY running 64-bit Ubuntu 18.04.1 LTS
 // Command     : write_verilog -force -mode funcsim
 //               /home/yoshiki/xilinx/nexys4/ov7670/ov7670.srcs/sources_1/bd/design_1/ip/design_1_counter_0_0/design_1_counter_0_0_sim_netlist.v
@@ -20,9 +20,9 @@ module design_1_counter_0_0
     cnt_out);
   input pclk;
   output p_out;
-  output [13:0]cnt_out;
+  output [12:0]cnt_out;
 
-  wire [13:0]cnt_out;
+  wire [12:0]cnt_out;
   wire pclk;
 
   assign p_out = pclk;
@@ -35,11 +35,11 @@ endmodule
 module design_1_counter_0_0_counter
    (cnt_out,
     pclk);
-  output [13:0]cnt_out;
+  output [12:0]cnt_out;
   input pclk;
 
-  wire [13:0]cnt_out;
-  wire [14:14]counter;
+  wire [12:0]cnt_out;
+  wire [14:13]counter;
   wire counter0_carry__0_i_1_n_0;
   wire counter0_carry__0_i_2_n_0;
   wire counter0_carry__0_i_3_n_0;
@@ -67,10 +67,10 @@ module design_1_counter_0_0_counter
   wire counter0_carry_n_1;
   wire counter0_carry_n_2;
   wire counter0_carry_n_3;
-  wire \counter[13]_i_1_n_0 ;
-  wire \counter[13]_i_2_n_0 ;
-  wire \counter[13]_i_3_n_0 ;
-  wire \counter[13]_i_4_n_0 ;
+  wire \counter[12]_i_1_n_0 ;
+  wire \counter[12]_i_2_n_0 ;
+  wire \counter[12]_i_3_n_0 ;
+  wire \counter[12]_i_4_n_0 ;
   wire [14:1]data0;
   wire [0:0]data0__0;
   wire pclk;
@@ -148,12 +148,12 @@ module design_1_counter_0_0_counter
   LUT1 #(
     .INIT(2'h2)) 
     counter0_carry__2_i_1
-       (.I0(counter),
+       (.I0(counter[14]),
         .O(counter0_carry__2_i_1_n_0));
   LUT1 #(
     .INIT(2'h2)) 
     counter0_carry__2_i_2
-       (.I0(cnt_out[13]),
+       (.I0(counter[13]),
         .O(counter0_carry__2_i_2_n_0));
   LUT1 #(
     .INIT(2'h2)) 
@@ -182,38 +182,38 @@ module design_1_counter_0_0_counter
         .O(data0__0));
   LUT6 #(
     .INIT(64'h0000000000001000)) 
-    \counter[13]_i_1 
-       (.I0(\counter[13]_i_2_n_0 ),
-        .I1(counter),
+    \counter[12]_i_1 
+       (.I0(\counter[12]_i_2_n_0 ),
+        .I1(counter[14]),
         .I2(cnt_out[0]),
         .I3(cnt_out[1]),
-        .I4(\counter[13]_i_3_n_0 ),
-        .I5(\counter[13]_i_4_n_0 ),
-        .O(\counter[13]_i_1_n_0 ));
+        .I4(\counter[12]_i_3_n_0 ),
+        .I5(\counter[12]_i_4_n_0 ),
+        .O(\counter[12]_i_1_n_0 ));
   LUT4 #(
     .INIT(16'h7FFF)) 
-    \counter[13]_i_2 
+    \counter[12]_i_2 
        (.I0(cnt_out[11]),
         .I1(cnt_out[12]),
         .I2(cnt_out[9]),
         .I3(cnt_out[10]),
-        .O(\counter[13]_i_2_n_0 ));
+        .O(\counter[12]_i_2_n_0 ));
   LUT4 #(
     .INIT(16'hFF7F)) 
-    \counter[13]_i_3 
+    \counter[12]_i_3 
        (.I0(cnt_out[3]),
         .I1(cnt_out[4]),
         .I2(cnt_out[2]),
-        .I3(cnt_out[13]),
-        .O(\counter[13]_i_3_n_0 ));
+        .I3(counter[13]),
+        .O(\counter[12]_i_3_n_0 ));
   LUT4 #(
     .INIT(16'h7FFF)) 
-    \counter[13]_i_4 
+    \counter[12]_i_4 
        (.I0(cnt_out[7]),
         .I1(cnt_out[8]),
         .I2(cnt_out[5]),
         .I3(cnt_out[6]),
-        .O(\counter[13]_i_4_n_0 ));
+        .O(\counter[12]_i_4_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \counter_reg[0] 
@@ -221,7 +221,7 @@ module design_1_counter_0_0_counter
         .CE(1'b1),
         .D(data0__0),
         .Q(cnt_out[0]),
-        .R(\counter[13]_i_1_n_0 ));
+        .R(\counter[12]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \counter_reg[10] 
@@ -229,7 +229,7 @@ module design_1_counter_0_0_counter
         .CE(1'b1),
         .D(data0[10]),
         .Q(cnt_out[10]),
-        .R(\counter[13]_i_1_n_0 ));
+        .R(\counter[12]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \counter_reg[11] 
@@ -237,7 +237,7 @@ module design_1_counter_0_0_counter
         .CE(1'b1),
         .D(data0[11]),
         .Q(cnt_out[11]),
-        .R(\counter[13]_i_1_n_0 ));
+        .R(\counter[12]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \counter_reg[12] 
@@ -245,23 +245,23 @@ module design_1_counter_0_0_counter
         .CE(1'b1),
         .D(data0[12]),
         .Q(cnt_out[12]),
-        .R(\counter[13]_i_1_n_0 ));
+        .R(\counter[12]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \counter_reg[13] 
        (.C(pclk),
         .CE(1'b1),
         .D(data0[13]),
-        .Q(cnt_out[13]),
-        .R(\counter[13]_i_1_n_0 ));
+        .Q(counter[13]),
+        .R(\counter[12]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \counter_reg[14] 
        (.C(pclk),
         .CE(1'b1),
         .D(data0[14]),
-        .Q(counter),
-        .R(\counter[13]_i_1_n_0 ));
+        .Q(counter[14]),
+        .R(\counter[12]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \counter_reg[1] 
@@ -269,7 +269,7 @@ module design_1_counter_0_0_counter
         .CE(1'b1),
         .D(data0[1]),
         .Q(cnt_out[1]),
-        .R(\counter[13]_i_1_n_0 ));
+        .R(\counter[12]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \counter_reg[2] 
@@ -277,7 +277,7 @@ module design_1_counter_0_0_counter
         .CE(1'b1),
         .D(data0[2]),
         .Q(cnt_out[2]),
-        .R(\counter[13]_i_1_n_0 ));
+        .R(\counter[12]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \counter_reg[3] 
@@ -285,7 +285,7 @@ module design_1_counter_0_0_counter
         .CE(1'b1),
         .D(data0[3]),
         .Q(cnt_out[3]),
-        .R(\counter[13]_i_1_n_0 ));
+        .R(\counter[12]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \counter_reg[4] 
@@ -293,7 +293,7 @@ module design_1_counter_0_0_counter
         .CE(1'b1),
         .D(data0[4]),
         .Q(cnt_out[4]),
-        .R(\counter[13]_i_1_n_0 ));
+        .R(\counter[12]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \counter_reg[5] 
@@ -301,7 +301,7 @@ module design_1_counter_0_0_counter
         .CE(1'b1),
         .D(data0[5]),
         .Q(cnt_out[5]),
-        .R(\counter[13]_i_1_n_0 ));
+        .R(\counter[12]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \counter_reg[6] 
@@ -309,7 +309,7 @@ module design_1_counter_0_0_counter
         .CE(1'b1),
         .D(data0[6]),
         .Q(cnt_out[6]),
-        .R(\counter[13]_i_1_n_0 ));
+        .R(\counter[12]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \counter_reg[7] 
@@ -317,7 +317,7 @@ module design_1_counter_0_0_counter
         .CE(1'b1),
         .D(data0[7]),
         .Q(cnt_out[7]),
-        .R(\counter[13]_i_1_n_0 ));
+        .R(\counter[12]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \counter_reg[8] 
@@ -325,7 +325,7 @@ module design_1_counter_0_0_counter
         .CE(1'b1),
         .D(data0[8]),
         .Q(cnt_out[8]),
-        .R(\counter[13]_i_1_n_0 ));
+        .R(\counter[12]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \counter_reg[9] 
@@ -333,7 +333,7 @@ module design_1_counter_0_0_counter
         .CE(1'b1),
         .D(data0[9]),
         .Q(cnt_out[9]),
-        .R(\counter[13]_i_1_n_0 ));
+        .R(\counter[12]_i_1_n_0 ));
 endmodule
 `ifndef GLBL
 `define GLBL

@@ -23,14 +23,14 @@
 module counter(
     input wire pclk,
     output wire p_out,
-    output wire [13:0] cnt_out
+    output wire [12:0] cnt_out
     );
     
 
     reg [14:0] counter = 13'h0;
     reg tmp = 1'b0;
     assign p_out = pclk;
-    assign cnt_out = counter[13:0];
+    assign cnt_out = counter[12:0];
     
     always @(posedge pclk) begin
         if(counter == 13'd_8191) begin

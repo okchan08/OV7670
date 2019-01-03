@@ -1,8 +1,8 @@
 -- Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2017.2 (lin64) Build 1909853 Thu Jun 15 18:39:10 MDT 2017
--- Date        : Fri Jul  6 21:43:27 2018
--- Host        : yoshiki-FMVA77JRY running 64-bit Ubuntu 18.04 LTS
+-- Date        : Thu Jan  3 16:34:15 2019
+-- Host        : yoshiki-FMVA77JRY running 64-bit Ubuntu 18.04.1 LTS
 -- Command     : write_vhdl -force -mode funcsim
 --               /home/yoshiki/xilinx/nexys4/ov7670/ov7670.srcs/sources_1/bd/design_1/ip/design_1_camera_controller_0_0/design_1_camera_controller_0_0_sim_netlist.vhdl
 -- Design      : design_1_camera_controller_0_0
@@ -698,8 +698,9 @@ architecture STRUCTURE of design_1_camera_controller_0_0_i2c_controller is
   signal \data_sr_reg_n_0_[7]\ : STD_LOGIC;
   signal \data_sr_reg_n_0_[8]\ : STD_LOGIC;
   signal \data_sr_reg_n_0_[9]\ : STD_LOGIC;
-  signal \divider_reg__0\ : STD_LOGIC_VECTOR ( 7 downto 6 );
-  signal \divider_reg__1\ : STD_LOGIC_VECTOR ( 5 downto 0 );
+  signal \divider_reg__0\ : STD_LOGIC_VECTOR ( 5 downto 0 );
+  signal \divider_reg_n_0_[6]\ : STD_LOGIC;
+  signal \divider_reg_n_0_[7]\ : STD_LOGIC;
   signal \^p_0_in\ : STD_LOGIC;
   signal \p_0_in__0\ : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal p_1_in_0 : STD_LOGIC_VECTOR ( 1 downto 0 );
@@ -791,8 +792,8 @@ address_reg_rep_i_1: unisim.vcomponents.LUT2
     )
         port map (
       I0 => \busy_sr[0]_i_3_n_0\,
-      I1 => \divider_reg__0\(6),
-      I2 => \divider_reg__0\(7),
+      I1 => \divider_reg_n_0_[6]\,
+      I2 => \divider_reg_n_0_[7]\,
       I3 => \^p_0_in\,
       I4 => \^busy_sr_reg[1]_0\,
       I5 => p_1_in(0),
@@ -803,12 +804,12 @@ address_reg_rep_i_1: unisim.vcomponents.LUT2
       INIT => X"7FFFFFFFFFFFFFFF"
     )
         port map (
-      I0 => \divider_reg__1\(4),
-      I1 => \divider_reg__1\(2),
-      I2 => \divider_reg__1\(0),
-      I3 => \divider_reg__1\(1),
-      I4 => \divider_reg__1\(3),
-      I5 => \divider_reg__1\(5),
+      I0 => \divider_reg__0\(4),
+      I1 => \divider_reg__0\(2),
+      I2 => \divider_reg__0\(0),
+      I3 => \divider_reg__0\(1),
+      I4 => \divider_reg__0\(3),
+      I5 => \divider_reg__0\(5),
       O => \busy_sr[0]_i_3_n_0\
     );
 \busy_sr[0]_i_4\: unisim.vcomponents.LUT5
@@ -816,10 +817,10 @@ address_reg_rep_i_1: unisim.vcomponents.LUT2
       INIT => X"FFFFFFFE"
     )
         port map (
-      I0 => \divider_reg__1\(2),
-      I1 => \divider_reg__1\(3),
-      I2 => \divider_reg__1\(0),
-      I3 => \divider_reg__1\(1),
+      I0 => \divider_reg__0\(2),
+      I1 => \divider_reg__0\(3),
+      I2 => \divider_reg__0\(0),
+      I3 => \divider_reg__0\(1),
       I4 => \busy_sr[0]_i_5_n_0\,
       O => \^busy_sr_reg[1]_0\
     );
@@ -828,10 +829,10 @@ address_reg_rep_i_1: unisim.vcomponents.LUT2
       INIT => X"FFFE"
     )
         port map (
-      I0 => \divider_reg__1\(5),
-      I1 => \divider_reg__1\(4),
-      I2 => \divider_reg__0\(7),
-      I3 => \divider_reg__0\(6),
+      I0 => \divider_reg__0\(5),
+      I1 => \divider_reg__0\(4),
+      I2 => \divider_reg_n_0_[7]\,
+      I3 => \divider_reg_n_0_[6]\,
       O => \busy_sr[0]_i_5_n_0\
     );
 \busy_sr[10]_i_1\: unisim.vcomponents.LUT2
@@ -1049,8 +1050,8 @@ address_reg_rep_i_1: unisim.vcomponents.LUT2
       I0 => p_1_in(0),
       I1 => \^busy_sr_reg[1]_0\,
       I2 => \^p_0_in\,
-      I3 => \divider_reg__0\(7),
-      I4 => \divider_reg__0\(6),
+      I3 => \divider_reg_n_0_[7]\,
+      I4 => \divider_reg_n_0_[6]\,
       I5 => \busy_sr[0]_i_3_n_0\,
       O => \busy_sr[31]_i_1_n_0\
     );
@@ -2021,7 +2022,7 @@ address_reg_rep_i_1: unisim.vcomponents.LUT2
       INIT => X"1"
     )
         port map (
-      I0 => \divider_reg__1\(0),
+      I0 => \divider_reg__0\(0),
       O => \p_0_in__0\(0)
     );
 \divider[1]_i_1\: unisim.vcomponents.LUT2
@@ -2029,8 +2030,8 @@ address_reg_rep_i_1: unisim.vcomponents.LUT2
       INIT => X"6"
     )
         port map (
-      I0 => \divider_reg__1\(0),
-      I1 => \divider_reg__1\(1),
+      I0 => \divider_reg__0\(0),
+      I1 => \divider_reg__0\(1),
       O => \p_0_in__0\(1)
     );
 \divider[2]_i_1\: unisim.vcomponents.LUT3
@@ -2038,9 +2039,9 @@ address_reg_rep_i_1: unisim.vcomponents.LUT2
       INIT => X"78"
     )
         port map (
-      I0 => \divider_reg__1\(1),
-      I1 => \divider_reg__1\(0),
-      I2 => \divider_reg__1\(2),
+      I0 => \divider_reg__0\(1),
+      I1 => \divider_reg__0\(0),
+      I2 => \divider_reg__0\(2),
       O => \p_0_in__0\(2)
     );
 \divider[3]_i_1\: unisim.vcomponents.LUT4
@@ -2048,10 +2049,10 @@ address_reg_rep_i_1: unisim.vcomponents.LUT2
       INIT => X"7F80"
     )
         port map (
-      I0 => \divider_reg__1\(2),
-      I1 => \divider_reg__1\(0),
-      I2 => \divider_reg__1\(1),
-      I3 => \divider_reg__1\(3),
+      I0 => \divider_reg__0\(2),
+      I1 => \divider_reg__0\(0),
+      I2 => \divider_reg__0\(1),
+      I3 => \divider_reg__0\(3),
       O => \p_0_in__0\(3)
     );
 \divider[4]_i_1\: unisim.vcomponents.LUT5
@@ -2059,11 +2060,11 @@ address_reg_rep_i_1: unisim.vcomponents.LUT2
       INIT => X"7FFF8000"
     )
         port map (
-      I0 => \divider_reg__1\(3),
-      I1 => \divider_reg__1\(1),
-      I2 => \divider_reg__1\(0),
-      I3 => \divider_reg__1\(2),
-      I4 => \divider_reg__1\(4),
+      I0 => \divider_reg__0\(3),
+      I1 => \divider_reg__0\(1),
+      I2 => \divider_reg__0\(0),
+      I3 => \divider_reg__0\(2),
+      I4 => \divider_reg__0\(4),
       O => \p_0_in__0\(4)
     );
 \divider[5]_i_1\: unisim.vcomponents.LUT6
@@ -2071,12 +2072,12 @@ address_reg_rep_i_1: unisim.vcomponents.LUT2
       INIT => X"7FFFFFFF80000000"
     )
         port map (
-      I0 => \divider_reg__1\(4),
-      I1 => \divider_reg__1\(2),
-      I2 => \divider_reg__1\(0),
-      I3 => \divider_reg__1\(1),
-      I4 => \divider_reg__1\(3),
-      I5 => \divider_reg__1\(5),
+      I0 => \divider_reg__0\(4),
+      I1 => \divider_reg__0\(2),
+      I2 => \divider_reg__0\(0),
+      I3 => \divider_reg__0\(1),
+      I4 => \divider_reg__0\(3),
+      I5 => \divider_reg__0\(5),
       O => \p_0_in__0\(5)
     );
 \divider[6]_i_1\: unisim.vcomponents.LUT2
@@ -2085,7 +2086,7 @@ address_reg_rep_i_1: unisim.vcomponents.LUT2
     )
         port map (
       I0 => \busy_sr[0]_i_3_n_0\,
-      I1 => \divider_reg__0\(6),
+      I1 => \divider_reg_n_0_[6]\,
       O => \p_0_in__0\(6)
     );
 \divider[7]_i_2\: unisim.vcomponents.LUT3
@@ -2093,20 +2094,20 @@ address_reg_rep_i_1: unisim.vcomponents.LUT2
       INIT => X"D2"
     )
         port map (
-      I0 => \divider_reg__0\(6),
+      I0 => \divider_reg_n_0_[6]\,
       I1 => \busy_sr[0]_i_3_n_0\,
-      I2 => \divider_reg__0\(7),
+      I2 => \divider_reg_n_0_[7]\,
       O => \p_0_in__0\(7)
     );
 \divider_reg[0]\: unisim.vcomponents.FDRE
     generic map(
-      INIT => '1'
+      INIT => '0'
     )
         port map (
       C => clk,
       CE => E(0),
       D => \p_0_in__0\(0),
-      Q => \divider_reg__1\(0),
+      Q => \divider_reg__0\(0),
       R => '0'
     );
 \divider_reg[1]\: unisim.vcomponents.FDRE
@@ -2117,73 +2118,73 @@ address_reg_rep_i_1: unisim.vcomponents.LUT2
       C => clk,
       CE => E(0),
       D => \p_0_in__0\(1),
-      Q => \divider_reg__1\(1),
+      Q => \divider_reg__0\(1),
       R => '0'
     );
 \divider_reg[2]\: unisim.vcomponents.FDRE
     generic map(
-      INIT => '0'
+      INIT => '1'
     )
         port map (
       C => clk,
       CE => E(0),
       D => \p_0_in__0\(2),
-      Q => \divider_reg__1\(2),
+      Q => \divider_reg__0\(2),
       R => '0'
     );
 \divider_reg[3]\: unisim.vcomponents.FDRE
     generic map(
-      INIT => '0'
+      INIT => '1'
     )
         port map (
       C => clk,
       CE => E(0),
       D => \p_0_in__0\(3),
-      Q => \divider_reg__1\(3),
+      Q => \divider_reg__0\(3),
       R => '0'
     );
 \divider_reg[4]\: unisim.vcomponents.FDRE
     generic map(
-      INIT => '0'
+      INIT => '1'
     )
         port map (
       C => clk,
       CE => E(0),
       D => \p_0_in__0\(4),
-      Q => \divider_reg__1\(4),
+      Q => \divider_reg__0\(4),
       R => '0'
     );
 \divider_reg[5]\: unisim.vcomponents.FDRE
     generic map(
-      INIT => '0'
+      INIT => '1'
     )
         port map (
       C => clk,
       CE => E(0),
       D => \p_0_in__0\(5),
-      Q => \divider_reg__1\(5),
+      Q => \divider_reg__0\(5),
       R => '0'
     );
 \divider_reg[6]\: unisim.vcomponents.FDRE
     generic map(
-      INIT => '0'
+      INIT => '1'
     )
         port map (
       C => clk,
       CE => E(0),
       D => \p_0_in__0\(6),
-      Q => \divider_reg__0\(6),
+      Q => \divider_reg_n_0_[6]\,
       R => '0'
     );
 \divider_reg[7]\: unisim.vcomponents.FDRE
     generic map(
-      INIT => '0'
+      INIT => '1'
     )
         port map (
       C => clk,
       CE => E(0),
       D => \p_0_in__0\(7),
-      Q => \divider_reg__0\(7),
+      Q => \divider_reg_n_0_[7]\,
       R => '0'
     );
 sioc_i_1: unisim.vcomponents.LUT6
@@ -2204,8 +2205,8 @@ sioc_i_2: unisim.vcomponents.LUT2
       INIT => X"6"
     )
         port map (
-      I0 => \divider_reg__0\(6),
-      I1 => \divider_reg__0\(7),
+      I0 => \divider_reg_n_0_[6]\,
+      I1 => \divider_reg_n_0_[7]\,
       O => sioc_i_2_n_0
     );
 sioc_i_3: unisim.vcomponents.LUT4
@@ -2215,7 +2216,7 @@ sioc_i_3: unisim.vcomponents.LUT4
         port map (
       I0 => sioc_i_5_n_0,
       I1 => \busy_sr_reg_n_0_[30]\,
-      I2 => \divider_reg__0\(6),
+      I2 => \divider_reg_n_0_[6]\,
       I3 => \^p_0_in\,
       O => sioc_i_3_n_0
     );

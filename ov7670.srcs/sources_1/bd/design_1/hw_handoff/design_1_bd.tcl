@@ -40,7 +40,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 
 # The design that will be created by this Tcl script contains the following 
 # module references:
-# VGA, camera_capture, camera_controller, counter
+# VGA, button, camera_capture, camera_controller, counter
 
 # Please add the sources of those modules before sourcing this Tcl script.
 
@@ -170,12 +170,14 @@ proc create_root_design { parentCell } {
   set camera_h_ref [ create_bd_port -dir I camera_h_ref ]
   set camera_v_sync [ create_bd_port -dir I camera_v_sync ]
   set clk_in1 [ create_bd_port -dir I -type clk clk_in1 ]
-  set cnt_out [ create_bd_port -dir O -from 13 -to 0 cnt_out ]
+  set cnt_out [ create_bd_port -dir O -from 12 -to 0 cnt_out ]
+  set cntl_in [ create_bd_port -dir I cntl_in ]
   set config_done [ create_bd_port -dir O config_done ]
   set din [ create_bd_port -dir I -from 7 -to 0 din ]
   set pclk [ create_bd_port -dir I pclk ]
   set pclk_out [ create_bd_port -dir O pclk_out ]
   set power_down [ create_bd_port -dir O power_down ]
+  set resend_in [ create_bd_port -dir I resend_in ]
   set reset [ create_bd_port -dir O -type rst reset ]
   set sioc [ create_bd_port -dir O sioc ]
   set siod [ create_bd_port -dir IO siod ]
@@ -209,15 +211,26 @@ CONFIG.Port_B_Write_Rate {0} \
 CONFIG.Read_Width_A {12} \
 CONFIG.Read_Width_B {12} \
 CONFIG.Register_PortA_Output_of_Memory_Primitives {false} \
-CONFIG.Register_PortB_Output_of_Memory_Primitives {true} \
+CONFIG.Register_PortB_Output_of_Memory_Primitives {false} \
 CONFIG.Use_Byte_Write_Enable {false} \
 CONFIG.Use_RSTA_Pin {false} \
-CONFIG.Write_Depth_A {153600} \
+CONFIG.Write_Depth_A {307200} \
 CONFIG.Write_Width_A {12} \
 CONFIG.Write_Width_B {12} \
 CONFIG.use_bram_block {Stand_Alone} \
  ] $blk_mem_gen_0
 
+  # Create instance: button_0, and set properties
+  set block_name button
+  set block_cell_name button_0
+  if { [catch {set button_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $button_0 eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
   # Create instance: camera_capture_0, and set properties
   set block_name camera_capture
   set block_cell_name camera_capture_0
@@ -250,17 +263,17 @@ CONFIG.CLKOUT2_JITTER {114.767} \
 CONFIG.CLKOUT2_PHASE_ERROR {87.466} \
 CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {108} \
 CONFIG.CLKOUT2_USED {true} \
-CONFIG.CLKOUT3_JITTER {191.758} \
+CONFIG.CLKOUT3_JITTER {182.550} \
 CONFIG.CLKOUT3_PHASE_ERROR {87.466} \
-CONFIG.CLKOUT3_REQUESTED_OUT_FREQ {8.0} \
+CONFIG.CLKOUT3_REQUESTED_OUT_FREQ {12} \
 CONFIG.CLKOUT3_USED {true} \
 CONFIG.CLK_OUT1_PORT {clk_vga_148_5MHz} \
 CONFIG.CLK_OUT2_PORT {clk_108MHz} \
-CONFIG.CLK_OUT3_PORT {clk_8MHz} \
+CONFIG.CLK_OUT3_PORT {clk_12MHz} \
 CONFIG.MMCM_CLKFBOUT_MULT_F {11.875} \
 CONFIG.MMCM_CLKOUT0_DIVIDE_F {8.000} \
 CONFIG.MMCM_CLKOUT1_DIVIDE {11} \
-CONFIG.MMCM_CLKOUT2_DIVIDE {128} \
+CONFIG.MMCM_CLKOUT2_DIVIDE {99} \
 CONFIG.MMCM_DIVCLK_DIVIDE {1} \
 CONFIG.NUM_OUT_CLKS {3} \
  ] $clk_wiz_0
@@ -276,12 +289,6 @@ CONFIG.NUM_OUT_CLKS {3} \
      return 1
    }
   
-  # Create instance: xlconstant_0, and set properties
-  set xlconstant_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_0 ]
-  set_property -dict [ list \
-CONFIG.CONST_VAL {0} \
- ] $xlconstant_0
-
   # Create instance: xlconstant_1, and set properties
   set xlconstant_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_1 ]
   set_property -dict [ list \
@@ -290,6 +297,9 @@ CONFIG.CONST_VAL {0} \
 
   # Create port connections
   connect_bd_net -net Net [get_bd_ports siod] [get_bd_pins camera_controller_0/siod]
+  set_property -dict [ list \
+HDL_ATTRIBUTE.DEBUG {true} \
+ ] [get_bd_nets Net]
   connect_bd_net -net VGA_0_VGA_BLUE [get_bd_ports VGA_BLUE] [get_bd_pins VGA_0/VGA_BLUE]
   connect_bd_net -net VGA_0_VGA_GREEN [get_bd_ports VGA_GREEN] [get_bd_pins VGA_0/VGA_GREEN]
   connect_bd_net -net VGA_0_VGA_H_SYNC [get_bd_ports VGA_H_SYNC] [get_bd_pins VGA_0/VGA_H_SYNC]
@@ -303,6 +313,8 @@ HDL_ATTRIBUTE.DEBUG {true} \
   set_property -dict [ list \
 HDL_ATTRIBUTE.DEBUG {true} \
  ] [get_bd_nets blk_mem_gen_0_doutb]
+  connect_bd_net -net button_0_cntl_out [get_bd_pins VGA_0/cntl] [get_bd_pins button_0/cntl_out]
+  connect_bd_net -net button_0_resend_out [get_bd_pins button_0/resend_out] [get_bd_pins camera_controller_0/resend]
   connect_bd_net -net camera_capture_0_addr [get_bd_pins blk_mem_gen_0/addra] [get_bd_pins camera_capture_0/addr]
   set_property -dict [ list \
 HDL_ATTRIBUTE.DEBUG {true} \
@@ -312,19 +324,35 @@ HDL_ATTRIBUTE.DEBUG {true} \
 HDL_ATTRIBUTE.DEBUG {true} \
  ] [get_bd_nets camera_capture_0_dout]
   connect_bd_net -net camera_capture_0_wr_en [get_bd_pins blk_mem_gen_0/wea] [get_bd_pins camera_capture_0/wr_en]
+  connect_bd_net -net camera_controller_0_config_done [get_bd_ports config_done] [get_bd_pins camera_controller_0/config_done]
   set_property -dict [ list \
 HDL_ATTRIBUTE.DEBUG {true} \
- ] [get_bd_nets camera_capture_0_wr_en]
-  connect_bd_net -net camera_controller_0_config_done [get_bd_ports config_done] [get_bd_pins camera_controller_0/config_done]
+ ] [get_bd_nets camera_controller_0_config_done]
   connect_bd_net -net camera_controller_0_power_down [get_bd_ports power_down] [get_bd_pins camera_controller_0/power_down]
+  set_property -dict [ list \
+HDL_ATTRIBUTE.DEBUG {true} \
+ ] [get_bd_nets camera_controller_0_power_down]
   connect_bd_net -net camera_controller_0_reset [get_bd_ports reset] [get_bd_pins camera_controller_0/reset]
   connect_bd_net -net camera_controller_0_sioc [get_bd_ports sioc] [get_bd_pins camera_controller_0/sioc]
+  set_property -dict [ list \
+HDL_ATTRIBUTE.DEBUG {true} \
+ ] [get_bd_nets camera_controller_0_sioc]
   connect_bd_net -net camera_controller_0_xclk [get_bd_ports xclk] [get_bd_pins camera_controller_0/xclk]
+  set_property -dict [ list \
+HDL_ATTRIBUTE.DEBUG {true} \
+ ] [get_bd_nets camera_controller_0_xclk]
   connect_bd_net -net camera_h_ref_1 [get_bd_ports camera_h_ref] [get_bd_pins camera_capture_0/camera_h_ref]
+  set_property -dict [ list \
+HDL_ATTRIBUTE.DEBUG {true} \
+ ] [get_bd_nets camera_h_ref_1]
   connect_bd_net -net camera_v_sync_1 [get_bd_ports camera_v_sync] [get_bd_pins camera_capture_0/camera_v_sync]
+  set_property -dict [ list \
+HDL_ATTRIBUTE.DEBUG {true} \
+ ] [get_bd_nets camera_v_sync_1]
   connect_bd_net -net clk_in1_1 [get_bd_ports clk_in1] [get_bd_pins clk_wiz_0/clk_in1]
-  connect_bd_net -net clk_wiz_0_clk_8MHz [get_bd_pins camera_controller_0/clk] [get_bd_pins clk_wiz_0/clk_8MHz]
-  connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins VGA_0/pix_clk] [get_bd_pins blk_mem_gen_0/clkb] [get_bd_pins clk_wiz_0/clk_vga_148_5MHz]
+  connect_bd_net -net clk_wiz_0_clk_12MHz [get_bd_pins camera_controller_0/clk] [get_bd_pins clk_wiz_0/clk_12MHz]
+  connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins VGA_0/pix_clk] [get_bd_pins blk_mem_gen_0/clkb] [get_bd_pins button_0/clk] [get_bd_pins clk_wiz_0/clk_vga_148_5MHz]
+  connect_bd_net -net cntl_in_1 [get_bd_ports cntl_in] [get_bd_pins button_0/cntl_in]
   connect_bd_net -net counter_0_cnt_out [get_bd_ports cnt_out] [get_bd_pins counter_0/cnt_out]
   connect_bd_net -net counter_0_p_out [get_bd_ports pclk_out] [get_bd_pins counter_0/p_out]
   set_property -dict [ list \
@@ -332,7 +360,7 @@ HDL_ATTRIBUTE.DEBUG {true} \
  ] [get_bd_nets counter_0_p_out]
   connect_bd_net -net din_1 [get_bd_ports din] [get_bd_pins camera_capture_0/din]
   connect_bd_net -net pclk_1 [get_bd_ports pclk] [get_bd_pins blk_mem_gen_0/clka] [get_bd_pins camera_capture_0/pclk] [get_bd_pins counter_0/pclk]
-  connect_bd_net -net xlconstant_0_dout [get_bd_pins camera_controller_0/resend] [get_bd_pins xlconstant_0/dout]
+  connect_bd_net -net resend_in_1 [get_bd_ports resend_in] [get_bd_pins button_0/resend_in]
   connect_bd_net -net xlconstant_1_dout [get_bd_pins clk_wiz_0/reset] [get_bd_pins xlconstant_1/dout]
 
   # Create address segments

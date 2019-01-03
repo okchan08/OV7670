@@ -1,7 +1,7 @@
 -- Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2017.2 (lin64) Build 1909853 Thu Jun 15 18:39:10 MDT 2017
--- Date        : Thu Jan  3 00:21:06 2019
+-- Date        : Thu Jan  3 17:28:27 2019
 -- Host        : yoshiki-FMVA77JRY running 64-bit Ubuntu 18.04.1 LTS
 -- Command     : write_vhdl -force -mode funcsim
 --               /home/yoshiki/xilinx/nexys4/ov7670/ov7670.srcs/sources_1/bd/design_1/ip/design_1_clk_wiz_0_0/design_1_clk_wiz_0_0_sim_netlist.vhdl
@@ -18,7 +18,7 @@ entity design_1_clk_wiz_0_0_design_1_clk_wiz_0_0_clk_wiz is
   port (
     clk_vga_148_5MHz : out STD_LOGIC;
     clk_108MHz : out STD_LOGIC;
-    clk_8MHz : out STD_LOGIC;
+    clk_12MHz : out STD_LOGIC;
     reset : in STD_LOGIC;
     locked : out STD_LOGIC;
     clk_in1 : in STD_LOGIC
@@ -29,7 +29,7 @@ end design_1_clk_wiz_0_0_design_1_clk_wiz_0_0_clk_wiz;
 
 architecture STRUCTURE of design_1_clk_wiz_0_0_design_1_clk_wiz_0_0_clk_wiz is
   signal clk_108MHz_design_1_clk_wiz_0_0 : STD_LOGIC;
-  signal clk_8MHz_design_1_clk_wiz_0_0 : STD_LOGIC;
+  signal clk_12MHz_design_1_clk_wiz_0_0 : STD_LOGIC;
   signal clk_in1_design_1_clk_wiz_0_0 : STD_LOGIC;
   signal clk_vga_148_5MHz_design_1_clk_wiz_0_0 : STD_LOGIC;
   signal clkfbout_buf_design_1_clk_wiz_0_0 : STD_LOGIC;
@@ -87,8 +87,8 @@ clkout2_buf: unisim.vcomponents.BUFG
     );
 clkout3_buf: unisim.vcomponents.BUFG
      port map (
-      I => clk_8MHz_design_1_clk_wiz_0_0,
-      O => clk_8MHz
+      I => clk_12MHz_design_1_clk_wiz_0_0,
+      O => clk_12MHz
     );
 mmcm_adv_inst: unisim.vcomponents.MMCME2_ADV
     generic map(
@@ -106,7 +106,7 @@ mmcm_adv_inst: unisim.vcomponents.MMCME2_ADV
       CLKOUT1_DUTY_CYCLE => 0.500000,
       CLKOUT1_PHASE => 0.000000,
       CLKOUT1_USE_FINE_PS => false,
-      CLKOUT2_DIVIDE => 128,
+      CLKOUT2_DIVIDE => 99,
       CLKOUT2_DUTY_CYCLE => 0.500000,
       CLKOUT2_PHASE => 0.000000,
       CLKOUT2_USE_FINE_PS => false,
@@ -154,7 +154,7 @@ mmcm_adv_inst: unisim.vcomponents.MMCME2_ADV
       CLKOUT0B => NLW_mmcm_adv_inst_CLKOUT0B_UNCONNECTED,
       CLKOUT1 => clk_108MHz_design_1_clk_wiz_0_0,
       CLKOUT1B => NLW_mmcm_adv_inst_CLKOUT1B_UNCONNECTED,
-      CLKOUT2 => clk_8MHz_design_1_clk_wiz_0_0,
+      CLKOUT2 => clk_12MHz_design_1_clk_wiz_0_0,
       CLKOUT2B => NLW_mmcm_adv_inst_CLKOUT2B_UNCONNECTED,
       CLKOUT3 => NLW_mmcm_adv_inst_CLKOUT3_UNCONNECTED,
       CLKOUT3B => NLW_mmcm_adv_inst_CLKOUT3B_UNCONNECTED,
@@ -185,7 +185,7 @@ entity design_1_clk_wiz_0_0 is
   port (
     clk_vga_148_5MHz : out STD_LOGIC;
     clk_108MHz : out STD_LOGIC;
-    clk_8MHz : out STD_LOGIC;
+    clk_12MHz : out STD_LOGIC;
     reset : in STD_LOGIC;
     locked : out STD_LOGIC;
     clk_in1 : in STD_LOGIC
@@ -199,7 +199,7 @@ begin
 inst: entity work.design_1_clk_wiz_0_0_design_1_clk_wiz_0_0_clk_wiz
      port map (
       clk_108MHz => clk_108MHz,
-      clk_8MHz => clk_8MHz,
+      clk_12MHz => clk_12MHz,
       clk_in1 => clk_in1,
       clk_vga_148_5MHz => clk_vga_148_5MHz,
       locked => locked,
