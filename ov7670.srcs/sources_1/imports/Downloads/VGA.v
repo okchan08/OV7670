@@ -113,17 +113,17 @@ module VGA #(
 
     // pixel address counter
     always @(posedge pix_clk) begin
-	if(v_cnt >= CAMERA_HEIGHT) begin
-		blank <= 1;
-		frame_addr <= 0;
-	end else begin
-		if(h_cnt <  CAMERA_WIDTH) begin
-			blank <= 0;
-			frame_addr <= frame_addr + 1;
-		end else begin
-			blank <= 1;
-		end
-	end
+	    if(v_cnt >= CAMERA_HEIGHT) begin
+	    	blank <= 1;
+	    	frame_addr <= 0;
+	    end else begin
+	    	if(h_cnt <  CAMERA_WIDTH) begin
+	    		blank <= 0;
+	    		frame_addr <= frame_addr + 1;
+	    	end else begin
+	    		blank <= 1;
+	    	end
+	    end
     end
 
     // validation

@@ -29,7 +29,10 @@ module button(
         output reg resend_out,
         output reg cntl_out,
         output reg reset_out
+
     );
+
+
 
     always @(posedge clk)begin
         resend_out <= resend_in;
